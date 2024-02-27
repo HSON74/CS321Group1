@@ -5,11 +5,11 @@ public class Workflow {
     private Integer objid;
 
     public Boolean AddWFltem(String step, Integer onjid) {
-        return new Boolenan();
+        return new Boolean();
     }
 
     public Integer GetNextWFltem(String step) {
-        return -1;
+        return 5;
     }
 
     public Integer CountWFltems(String step) {
@@ -18,5 +18,6 @@ public class Workflow {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
+        System.out.println(GetNextWFltem("Hello"));
     }
 }
