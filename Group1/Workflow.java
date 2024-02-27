@@ -5,7 +5,7 @@ public class Workflow {
     private Integer objid;
 
     public Boolean AddWFltem(String step, Integer onjid) {
-        return new Boolean();
+        return true;
     }
 
     public Integer GetNextWFltem(String step) {
