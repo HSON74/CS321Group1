@@ -1,3 +1,4 @@
+package org.openjfx.Group1;
 
 public class Workflow {
     private Integer wfid;
@@ -18,6 +19,6 @@ public class Workflow {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
-        System.out.println(GetNextWFltem("Hello"));
+        // System.out.println(GetNextWFltem("Hello"));
     }
 }
