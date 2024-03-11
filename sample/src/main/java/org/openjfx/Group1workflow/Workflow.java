@@ -1,4 +1,4 @@
-package org.openjfx.Group1;
+package org.openjfx.Group1workflow;
 
 public class Workflow {
     private Integer wfid;
@@ -14,7 +14,7 @@ public class Workflow {
     }
 
     public Integer CountWFltems(String step) {
-        return -1;
+        return 0;
     }
 
     public static void main(String[] args) {
