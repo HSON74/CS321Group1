@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -10,5 +11,11 @@ public class CountWFItemsTest {
         Workflow wfobj = new Workflow();
         int totalwf = wfobj.CountWFltems("null");
         assertEquals(totalwf, 0);
+        System.out.println("Hellow test");
+    }
+
+    public static void main(String[] args) {
+        CountWFItemsTest c = new CountWFItemsTest();
+        c.TestNewWFCout();
     }
 }
