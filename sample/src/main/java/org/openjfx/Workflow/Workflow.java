@@ -1,17 +1,13 @@
 package org.openjfx.Workflow;
 
 public class Workflow {
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello World");
-        // System.out.println(GetNextWFltem("Hello"));
-    }
-
     private Integer wfid;
     private String step;
     private Integer objid;
+
+    public Workflow() {
+
+    }
 
     public Boolean AddWFltem(String step, Integer onjid) {
         return true;
@@ -25,6 +21,31 @@ public class Workflow {
         return 0;
     }
 
+    public Form ReturnForm() {
+        return new Form();
+    }
+
+    public void Sumbit(Form form) {
+
+    }
+
+    public boolean getCheck(Form form) {
+        return true;
+    }
+
+    public Form generateForm() {
+        Form newForm = new Form();
+        Immigrant newImmigrant = new Immigrant();
+        Dependent newDependent = new Dependent();
+        newForm.setDependent(newDependent);
+        newForm.setImmigrant(newImmigrant);
+
+        return newForm;
+    }
+
+    /*
+     * Setter and Getter for Workflow Class.
+     */
     public Integer getWfid() {
         return wfid;
     }
