@@ -1,4 +1,4 @@
-package org.openjfx.Group1workflow;
+package org.openjfx.Workflow;
 
 public class Workflow {
     /**

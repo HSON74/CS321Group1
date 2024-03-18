@@ -1,9 +1,10 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package Business;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.openjfx.Workflow.*;
 
-public class CountWFItemsTest {
+public class testfortest {
     @Test
     void TestNewWFCout() {
         Workflow wfobj = new Workflow();
@@ -13,7 +14,7 @@ public class CountWFItemsTest {
     }
 
     public static void main(String[] args) {
-        CountWFItemsTest c = new CountWFItemsTest();
+        testfortest c = new testfortest();
         c.TestNewWFCout();
     }
 }
