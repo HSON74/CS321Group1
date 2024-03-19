@@ -9,11 +9,13 @@ public class Initiate {
     }
 
     public Form convertToForm() {
-        return new Form();
+        Form tempForm = system.generateForm();
+        return tempForm;
     }
 
     public void registerPerson(Form form) {
-
+        // Workflow for review and approval
+        system.Sumbit(form);
     }
 
     /* Setter and Getter for Initiate Class */
@@ -24,4 +26,5 @@ public class Initiate {
     public String getNextString() {
         return nextStep;
     }
+
 }

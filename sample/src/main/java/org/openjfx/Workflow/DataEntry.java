@@ -9,10 +9,17 @@ public class DataEntry {
     }
 
     // Cool UI/UX developer here--------------------------------
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         DataEntry user = new DataEntry();
         // Initiate Form by creating a new Form.
         user.systemForm = user.systemInitiate.convertToForm();
+        // Input User Information in the Form.
+
+        // Resigter Form in system.
+        user.systemInitiate.registerPerson(user.systemForm);
 
     }
 }
