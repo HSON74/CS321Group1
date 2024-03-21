@@ -5,9 +5,7 @@ public class Workflow {
     private String step;
     private Integer objid;
 
-    public Workflow() {
-
-    }
+    public Workflow() {}
 
     public Boolean AddWFltem(String step, Integer onjid) {
         return true;
@@ -25,7 +23,7 @@ public class Workflow {
         return new Form();
     }
 
-    public void Sumbit(Form form) {
+    public void Submit(Form form) {
 
     }
 
@@ -39,7 +37,6 @@ public class Workflow {
         Dependent newDependent = new Dependent();
         newForm.setDependent(newDependent);
         newForm.setImmigrant(newImmigrant);
-
         return newForm;
     }
 

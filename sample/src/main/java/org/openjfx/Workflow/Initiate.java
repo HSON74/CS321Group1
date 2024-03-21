@@ -15,7 +15,7 @@ public class Initiate {
 
     public void registerPerson(Form form) {
         // Workflow for review and approval
-        system.Sumbit(form);
+        system.Submit(form);
     }
 
     /* Setter and Getter for Initiate Class */
