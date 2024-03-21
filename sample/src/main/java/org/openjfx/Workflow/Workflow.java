@@ -1,4 +1,8 @@
-package org.openjfx.Business;
+package org.openjfx.Workflow;
+
+import org.openjfx.Business.Dependent;
+import org.openjfx.Business.Form;
+import org.openjfx.Business.Immigrant;
 
 public class Workflow {
     private Integer wfid;

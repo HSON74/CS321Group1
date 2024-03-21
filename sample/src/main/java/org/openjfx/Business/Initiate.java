@@ -1,5 +1,7 @@
 package org.openjfx.Business;
 
+import org.openjfx.Workflow.Workflow;
+
 public class Initiate {
     private String nextStep;
     protected Workflow system;
