@@ -8,6 +8,7 @@ import org.openjfx.Workflow.*;
 
 public class Group1TestCase1 {
     public static DataEntry case1;
+    Form testForm;
 
     @BeforeAll
     public static void inti() {
@@ -23,14 +24,14 @@ public class Group1TestCase1 {
     // Data Entry
     @Test
     public void testCase1() {
-        Form testForm = case1.systemInitiate.convertToForm();
+        testForm = case1.systemInitiate.convertToForm();
         assertNotNull(testForm, "");
     }
 
     // Review & Approval
     @AfterEach
     public void testCase2() {
-        Form testForm = case1.systemInitiate.convertToForm();
         assertNotNull(testForm, "");
+
     }
 }

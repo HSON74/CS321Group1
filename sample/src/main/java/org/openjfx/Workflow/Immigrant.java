@@ -103,7 +103,7 @@ public class Immigrant extends Person {
         return age;
     }
 
-    public int setPid() {
+    public int getPid() {
         return ImmigrantPid;
     }
 }

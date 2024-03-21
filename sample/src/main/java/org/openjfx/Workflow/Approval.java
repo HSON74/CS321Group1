@@ -6,15 +6,20 @@ public class Approval {
     private Database database;
 
     public Approval(String dataBase, Form form) {
-
-        iForm = form.getImmigrant();
-        dForm = form.getDependent();
+        if (Immigrant.class.isInstance(form.getImmigrant())) {
+            iForm = form.getImmigrant();
+        }
+        if (Immigrant.class.isInstance(form.getDependent())) {
+            dForm = form.getDependent();
+        }
         setDatabase(dataBase);
 
     }
 
     public void checkFrom() {
-
+        int iPid = iForm.getPid();
+        int dPid = dForm.getPid();
+        database.getData(iPid, dPid);
     }
 
     public boolean connection() {
