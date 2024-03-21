@@ -1,3 +1,15 @@
-module-info.class
-org\openjfx\App.class
+org\openjfx\Business\Form.class
+org\openjfx\Business\Person.class
+org\openjfx\Workflow\Review.class
+org\openjfx\Business\Initiate.class
+org\openjfx\Workflow\Database.class
+com\sample\Main.class
+org\openjfx\Business\main.class
+org\openjfx\Business\Workflow.class
+org\openjfx\Workflow\Approval$ApprovalStatus.class
+org\openjfx\Business\FormStatus.class
+org\openjfx\Business\DataEntry.class
+org\openjfx\Business\Immigrant.class
+org\openjfx\Workflow\Approval.class
 org\openjfx\SystemInfo.class
+org\openjfx\Business\Dependent.class

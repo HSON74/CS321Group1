@@ -52,4 +52,19 @@ public class Database {
         return true;
     }
 
+    public boolean removeImmigrant(int pid) {
+        return true;
+    }
+
+    public boolean removeDependent(int pid) {
+        return true;
+    }
+
+    public void updateImmigrant(Immigrant immigrant) {
+
+    }
+
+    public void updateDependent(Dependent dependent) {
+
+    }
 }
