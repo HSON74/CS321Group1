@@ -1,12 +1,18 @@
 package org.openjfx.Workflow;
 
+import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
 
 public class Approval {
+    protected enum ApprovalStatus {
+        INPROGRESS, NEEDREVIEW, COMPLETE
+    }
+
     private Immigrant iForm;
     private Dependent dForm;
     private Database database;
+    private ApprovalStatus approvalStatus;
 
     public Approval(String dataBase, Form form) {
         if (Immigrant.class.isInstance(form.getImmigrant())) {
@@ -23,10 +29,12 @@ public class Approval {
         if (iForm == null || dForm == null) {
             System.err.println("The immigrant or dependent form ");
         }
-        int iPid = iForm.getPid();
-        int dPid = dForm.getPid();
-        boolean isSystem = database.getData(iPid, dPid);
-
+        int iPid = iForm.getImmigrantPid();
+        int dPid = dForm.getDependentPid();
+        boolean isSystem = database.checkData(iPid, dPid);
+        if (isSystem) {
+            return true;
+        }
         return false;
     }
 
@@ -61,5 +69,13 @@ public class Approval {
 
     protected Database getDatabase() {
         return database;
+    }
+
+    public ApprovalStatus getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(ApprovalStatus status) {
+        this.approvalStatus = status;
     }
 }

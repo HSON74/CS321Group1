@@ -1,7 +1,5 @@
 package org.openjfx.Business;
 
-import org.openjfx.Workflow.Dependent;
-
 public class Immigrant extends Person {
     private int ImmigrantPid;
 
@@ -61,7 +59,7 @@ public class Immigrant extends Person {
         this.ssnumber = ssnumber;
     }
 
-    public void setPid(int pid) {
+    public void setImmigrantPid(int pid) {
         this.ImmigrantPid = pid;
     }
 
@@ -105,7 +103,7 @@ public class Immigrant extends Person {
         return age;
     }
 
-    public int getPid() {
+    public int getImmigrantPid() {
         return ImmigrantPid;
     }
 }

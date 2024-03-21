@@ -1,7 +1,5 @@
 package org.openjfx.Business;
 
-import org.openjfx.Workflow.Dependent;
-
 public class Form {
     private Immigrant immigrantForm;
     private Dependent dependentForm;
