@@ -13,9 +13,9 @@ public class Initiate {
         return tempForm;
     }
 
-    public void registerPerson(Form form) {
+    public boolean registerPerson(Form form) {
         // Workflow for review and approval
-        system.Sumbit(form);
+        return system.Sumbit(form);
     }
 
     /* Setter and Getter for Initiate Class */

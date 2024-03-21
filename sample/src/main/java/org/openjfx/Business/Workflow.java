@@ -27,8 +27,8 @@ public class Workflow {
         return new Form();
     }
 
-    public void Sumbit(Form form) {
-
+    public boolean Sumbit(Form form) {
+        return false;
     }
 
     public boolean getCheck(Form form) {
