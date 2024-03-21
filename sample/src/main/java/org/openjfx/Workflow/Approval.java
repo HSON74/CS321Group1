@@ -1,5 +1,8 @@
 package org.openjfx.Workflow;
 
+import org.openjfx.Business.Form;
+import org.openjfx.Business.Immigrant;
+
 public class Approval {
     private Immigrant iForm;
     private Dependent dForm;
@@ -16,10 +19,15 @@ public class Approval {
 
     }
 
-    public void checkFrom() {
+    public boolean checkFrom() {
+        if (iForm == null || dForm == null) {
+            System.err.println("The immigrant or dependent form ");
+        }
         int iPid = iForm.getPid();
         int dPid = dForm.getPid();
-        database.getData(iPid, dPid);
+        boolean isSystem = database.getData(iPid, dPid);
+
+        return false;
     }
 
     public boolean connection() {

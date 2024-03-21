@@ -1,5 +1,8 @@
 package org.openjfx.Workflow;
 
+import org.openjfx.Business.Form;
+import org.openjfx.Business.Immigrant;
+
 public class Database {
 
     private Immigrant iForm;
@@ -9,6 +12,7 @@ public class Database {
 
     }
 
+    // Add the infrom
     public boolean addData() {
         if (iForm == null || dForm == null) {
             return false;
@@ -30,13 +34,6 @@ public class Database {
             return false;
         }
         return true;
-    }
-
-    public Form getApprovForm() {
-        Form resultFrom = new Form();
-        resultFrom.setDependent(dForm);
-        resultFrom.setImmigrant(iForm);
-        return resultFrom;
     }
 
 }

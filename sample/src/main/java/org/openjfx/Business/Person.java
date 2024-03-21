@@ -1,4 +1,4 @@
-package org.openjfx.Workflow;
+package org.openjfx.Business;
 
 public class Person {
     protected String firstName;

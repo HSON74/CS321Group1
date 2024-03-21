@@ -1,4 +1,4 @@
-package org.openjfx.Workflow;
+package org.openjfx.Business;
 
 public class Initiate {
     private String nextStep;

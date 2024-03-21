@@ -1,5 +1,7 @@
 package org.openjfx.Workflow;
 
+import org.openjfx.Business.Immigrant;
+
 public class Dependent extends Immigrant {
     private boolean prevClaim;
     private int dependentPid;
