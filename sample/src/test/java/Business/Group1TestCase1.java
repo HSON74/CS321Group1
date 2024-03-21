@@ -28,9 +28,21 @@ public class Group1TestCase1 {
         assertNotNull(testForm, "");
     }
 
+    @Test
+    public void testCase2() {
+        testForm = case1.systemInitiate.convertToForm();
+        assertNotNull(testForm, "");
+    }
+
+    @Test
+    public void testCase3() {
+        testForm = case1.systemInitiate.convertToForm();
+        assertNotNull(testForm, "");
+    }
+
     // Review & Approval
     @AfterEach
-    public void testCase2() {
+    public void ReviewandApprovalTest() {
         assertNotNull(testForm, "");
 
     }
