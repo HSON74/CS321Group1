@@ -5,7 +5,7 @@ org\openjfx\Business\Initiate.class
 org\openjfx\Workflow\Database.class
 com\sample\Main.class
 org\openjfx\Business\Window.class
-org\openjfx\Business\Workflow.class
+org\openjfx\Workflow\Workflow.class
 org\openjfx\Workflow\Approval$ApprovalStatus.class
 org\openjfx\Business\FormStatus.class
 org\openjfx\Business\DataEntry.class
