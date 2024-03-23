@@ -13,8 +13,10 @@ public class Approval {
     private Dependent dForm;
     private Database database;
     private ApprovalStatus approvalStatus;
+    private Database approvalDatabase;
 
     public Approval(String dataBase, Form form) {
+
         if (Immigrant.class.isInstance(form.getImmigrant())) {
             iForm = form.getImmigrant();
         }

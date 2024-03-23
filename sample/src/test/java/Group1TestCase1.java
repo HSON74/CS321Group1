@@ -44,6 +44,8 @@ public class Group1TestCase1 {
     // Review & Approval
     @AfterEach
     public void ReviewandApprovalTest() {
+        // Approval Section
+        Approval tApproval = new Approval("table", testForm);
         case1.systemInitiate.registerPerson(testForm);
         assertNotNull(testForm, "");
 

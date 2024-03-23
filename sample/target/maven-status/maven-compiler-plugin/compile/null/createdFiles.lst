@@ -1,4 +1,5 @@
 org\openjfx\Business\Form.class
+org\openjfx\Business\Window1.class
 org\openjfx\Business\Person.class
 org\openjfx\Workflow\Review.class
 org\openjfx\Business\Initiate.class

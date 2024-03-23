@@ -7,7 +7,8 @@ import org.openjfx.Business.Immigrant;
 public class Database {
 
     private Immigrant iForm; //
-    private Dependent dForm;
+    private Dependent dForm; //
+    private String dataName;
 
     /*
      * Inital the table by create a table or access
