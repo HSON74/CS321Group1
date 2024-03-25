@@ -4,6 +4,11 @@ import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
 
+import javafx.scene.*;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.*;
+
 public class Approval {
     protected enum ApprovalStatus {
         INPROGRESS, NEEDREVIEW, COMPLETE
@@ -13,7 +18,22 @@ public class Approval {
     private Dependent dForm;
     private Database database;
     private ApprovalStatus approvalStatus;
-    private Database approvalDatabase;
+    private Workflow approvalWorkflow;
+
+    // Application Scene
+    public Scene approvalScene;
+
+    public void Adisplay(Form form, Workflow system, Stage primaryStage) {
+        iForm = form.getImmigrant();
+        dForm = form.getDependent();
+        this.approvalWorkflow = system;
+        Button b = new Button();
+        b.setText("Hello Do you Want Approval");
+        StackPane layout = new StackPane();
+        layout.getChildren().add(b);
+        approvalScene = new Scene(layout, 960, 540);
+
+    }
 
     public Approval(String dataBase, Form form) {
 
@@ -79,5 +99,9 @@ public class Approval {
 
     public void setApprovalStatus(ApprovalStatus status) {
         this.approvalStatus = status;
+    }
+
+    public Workflow getWorkflow() {
+        return approvalWorkflow;
     }
 }

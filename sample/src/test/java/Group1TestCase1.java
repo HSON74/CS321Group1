@@ -14,7 +14,7 @@ public class Group1TestCase1 {
     @BeforeAll
     public static void inti() {
 
-        case1 = new DataEntry();
+        case1 = new DataEntry(new Workflow());
     }
 
     @AfterAll

@@ -6,8 +6,8 @@ public class Initiate {
     private String nextStep;
     protected Workflow system;
 
-    public Initiate() {
-        system = new Workflow();
+    public Initiate(Workflow system) {
+        this.system = system;
     }
 
     public Form convertToForm() {

@@ -15,7 +15,7 @@ public class Database {
      * the table if the table exist.
      */
     public Database(String databaseName) {
-
+        this.dataName = databaseName;
     }
 
     // Add the
@@ -30,7 +30,7 @@ public class Database {
         return addDatatoFile;
     }
 
-    //
+    // Check the data are in system.
     public boolean checkData(int iPID, int dPID) {
 
         return true;
@@ -67,5 +67,13 @@ public class Database {
 
     public void updateDependent(Dependent dependent) {
 
+    }
+
+    public void setDataName(String name) {
+        this.dataName = name;
+    }
+
+    public String getDataName() {
+        return dataName;
     }
 }
