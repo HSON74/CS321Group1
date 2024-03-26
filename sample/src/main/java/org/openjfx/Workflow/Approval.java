@@ -20,7 +20,7 @@ public class Approval {
     private ApprovalStatus approvalStatus;
     private Workflow approvalWorkflow;
 
-    // Application Scene
+    // Application Scene update
     public Scene approvalScene;
 
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
