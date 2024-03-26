@@ -1,11 +1,30 @@
 package org.openjfx.Workflow;
 
+import org.openjfx.Business.DataEntry;
+import org.openjfx.Business.Dependent;
+import org.openjfx.Business.Form;
+import org.openjfx.Business.Immigrant;
+
 public class Workflow {
     private Integer wfid;
     private String step;
     private Integer objid;
+    protected Review workflowReveiw;
+    protected Approval workflowApproval;
+    protected DataEntry workfDataEntry;
 
-    public Workflow() {}
+    public Workflow(Form form) {
+        workfDataEntry = new DataEntry(this);
+        workflowReveiw = new Review();
+        workflowApproval = new Approval(null, form);
+    }
+
+    public Workflow() {
+        workfDataEntry = new DataEntry(this);
+        workfDataEntry.startProcess();
+        workflowReveiw = new Review();
+        workflowApproval = new Approval(null, workfDataEntry.systemForm);
+    }
 
     public Boolean AddWFltem(String step, Integer onjid) {
         return true;
@@ -23,8 +42,8 @@ public class Workflow {
         return new Form();
     }
 
-    public void Submit(Form form) {
-
+    public boolean Sumbit(Form form) {
+        return false;
     }
 
     public boolean getCheck(Form form) {
@@ -37,6 +56,7 @@ public class Workflow {
         Dependent newDependent = new Dependent();
         newForm.setDependent(newDependent);
         newForm.setImmigrant(newImmigrant);
+
         return newForm;
     }
 
@@ -65,5 +85,17 @@ public class Workflow {
 
     public void setObjid(Integer objid) {
         this.objid = objid;
+    }
+
+    public Review getReview() {
+        return workflowReveiw;
+    }
+
+    public Approval getApproval() {
+        return workflowApproval;
+    }
+
+    public DataEntry getDataEntry() {
+        return workfDataEntry;
     }
 }
