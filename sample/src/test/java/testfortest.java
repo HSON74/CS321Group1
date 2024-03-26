@@ -15,6 +15,5 @@ public class testfortest {
     public static void main(String[] args) {
         testfortest c = new testfortest();
         c.TestNewWFCout();
-
     }
 }

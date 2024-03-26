@@ -8,24 +8,33 @@ public class Workflow {
     private Integer wfid;
     private String step;
     private Integer objid;
-    protected Review workflowReveiw;
+    protected Review workflowReview;
     protected Approval workflowApproval;
     protected DataEntry workfDataEntry;
 
+    // This is the workflow constructor if there's already a form
     public Workflow(Form form) {
         workfDataEntry = new DataEntry(this);
-        workflowReveiw = new Review();
+        workflowReview = new Review();
         workflowApproval = new Approval(null, form);
     }
 
+    // This constructor is for when a new form is being created at the start of the class
     public Workflow() {
         workfDataEntry = new DataEntry(this);
         workfDataEntry.startProcess();
-        workflowReveiw = new Review();
+        workflowReview = new Review();
         workflowApproval = new Approval(null, workfDataEntry.systemForm);
     }
 
+    // This method is for when a new workflow item is being added
     public Boolean AddWFItem(String step, Integer onjid) {
+        if (step != getStep()) {
+            setStep(step);
+        }
+        else {
+            return false;
+        }
         return true;
     }
 
@@ -42,7 +51,8 @@ public class Workflow {
     }
 
     public boolean Submit(Form form) {
-        return false;
+        
+        return true;
     }
 
     public boolean getCheck(Form form) {
@@ -55,7 +65,6 @@ public class Workflow {
         Dependent newDependent = new Dependent();
         newForm.setDependent(newDependent);
         newForm.setImmigrant(newImmigrant);
-
         return newForm;
     }
 
@@ -87,7 +96,7 @@ public class Workflow {
     }
 
     public Review getReview() {
-        return workflowReveiw;
+        return workflowReview;
     }
 
     public Approval getApproval() {
