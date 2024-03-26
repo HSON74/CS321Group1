@@ -1,4 +1,4 @@
-package org.openjfx.Business;
+package org.openjfx.Workflow;
 
 public class Dependent extends Immigrant {
     private boolean prevClaim;
@@ -21,11 +21,11 @@ public class Dependent extends Immigrant {
         return prevClaim;
     }
 
-    public void setDependentPid(int pid) {
+    public void setPid(int pid) {
         this.dependentPid = pid;
     }
 
-    public int getDependentPid() {
+    public int setPid() {
         return dependentPid;
     }
 }

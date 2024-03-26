@@ -1,13 +1,11 @@
-package org.openjfx.Business;
-
-import org.openjfx.Workflow.Workflow;
+package org.openjfx.Workflow;
 
 public class Initiate {
     private String nextStep;
     protected Workflow system;
 
-    public Initiate(Workflow system) {
-        this.system = system;
+    public Initiate() {
+        system = new Workflow();
     }
 
     public Form convertToForm() {
@@ -15,9 +13,9 @@ public class Initiate {
         return tempForm;
     }
 
-    public boolean registerPerson(Form form) {
+    public void registerPerson(Form form) {
         // Workflow for review and approval
-        return system.Sumbit(form);
+        system.Submit(form);
     }
 
     /* Setter and Getter for Initiate Class */

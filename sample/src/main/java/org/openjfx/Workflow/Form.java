@@ -1,4 +1,4 @@
-package org.openjfx.Business;
+package org.openjfx.Workflow;
 
 public class Form {
     private Immigrant immigrantForm;

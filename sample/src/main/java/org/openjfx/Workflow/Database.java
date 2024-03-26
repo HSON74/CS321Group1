@@ -1,49 +1,28 @@
 package org.openjfx.Workflow;
 
-import org.openjfx.Business.Dependent;
-import org.openjfx.Business.Form;
-import org.openjfx.Business.Immigrant;
-
 public class Database {
 
-    private Immigrant iForm; //
-    private Dependent dForm; //
-    private String dataName;
+    private Immigrant iForm;
+    private Dependent dForm;
 
-    /*
-     * Inital the table by create a table or access
-     * the table if the table exist.
-     */
     public Database(String databaseName) {
-        this.dataName = databaseName;
+
     }
 
-    // Add the
-    public boolean addData(Form form) {
-        if (form == null) {
-            return false;
-        }
+    public boolean addData() {
         if (iForm == null || dForm == null) {
             return false;
         }
-        boolean addDatatoFile = saveData(form);
+        Form resultFrom = new Form();
+        resultFrom.setDependent(dForm);
+        resultFrom.setImmigrant(iForm);
+        boolean addDatatoFile = saveData(resultFrom);
         return addDatatoFile;
     }
 
-    // Check the data are in system.
-    public boolean checkData(int iPID, int dPID) {
+    public boolean getData(int iPID, int dPID) {
 
         return true;
-    }
-
-    public static Immigrant getDataImmigrant(int iPID) {
-
-        return new Immigrant();
-    }
-
-    public static Dependent getDataDependent(int iPID) {
-
-        return new Dependent();
     }
 
     private boolean saveData(Form inputForm) {
@@ -53,27 +32,11 @@ public class Database {
         return true;
     }
 
-    public boolean removeImmigrant(int pid) {
-        return true;
+    public Form getApprovForm() {
+        Form resultFrom = new Form();
+        resultFrom.setDependent(dForm);
+        resultFrom.setImmigrant(iForm);
+        return resultFrom;
     }
 
-    public boolean removeDependent(int pid) {
-        return true;
-    }
-
-    public void updateImmigrant(Immigrant immigrant) {
-
-    }
-
-    public void updateDependent(Dependent dependent) {
-
-    }
-
-    public void setDataName(String name) {
-        this.dataName = name;
-    }
-
-    public String getDataName() {
-        return dataName;
-    }
 }
