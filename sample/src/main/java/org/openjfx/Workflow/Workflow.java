@@ -41,7 +41,7 @@ public class Workflow {
         return new Form();
     }
 
-    public boolean Sumbit(Form form) {
+    public boolean Submit(Form form) {
         return false;
     }
 
