@@ -7,7 +7,7 @@ public class CountWFItemsTest {
     @Test
     void TestNewWFCout() {
         Workflow wfobj = new Workflow();
-        int totalwf = wfobj.CountWFltems("null");
+        int totalwf = wfobj.CountWFItems("null");
         assertEquals(totalwf, 0);
         System.out.println("Hellow test");
     }

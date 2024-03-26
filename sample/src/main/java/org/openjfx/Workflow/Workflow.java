@@ -25,15 +25,15 @@ public class Workflow {
         workflowApproval = new Approval(null, workfDataEntry.systemForm);
     }
 
-    public Boolean AddWFltem(String step, Integer onjid) {
+    public Boolean AddWFItem(String step, Integer onjid) {
         return true;
     }
 
-    public Integer GetNextWFltem(String step) {
+    public Integer GetNextWFItem(String step) {
         return Integer.parseInt(step);
     }
 
-    public Integer CountWFltems(String step) {
+    public Integer CountWFItems(String step) {
         return 0;
     }
 
