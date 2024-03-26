@@ -1,6 +1,6 @@
-package org.openjfx.Business;
+package org.openjfx.Workflow;
 
-import org.openjfx.Workflow.Workflow;
+import org.openjfx.Business.Form;
 
 public class Initiate {
     private String nextStep;

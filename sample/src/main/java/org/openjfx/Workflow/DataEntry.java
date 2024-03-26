@@ -1,6 +1,6 @@
-package org.openjfx.Business;
+package org.openjfx.Workflow;
 
-import org.openjfx.Workflow.Workflow;
+import org.openjfx.Business.Form;
 
 import javafx.scene.*;
 import javafx.scene.control.Button;

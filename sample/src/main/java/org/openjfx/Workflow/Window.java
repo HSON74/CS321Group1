@@ -1,6 +1,5 @@
-package org.openjfx.Business;
+package org.openjfx.Workflow;
 
-import org.openjfx.Workflow.*;
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;

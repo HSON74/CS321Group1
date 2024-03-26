@@ -1,6 +1,5 @@
 package org.openjfx.Workflow;
 
-import org.openjfx.Business.DataEntry;
 import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
