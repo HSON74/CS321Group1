@@ -25,9 +25,9 @@ public class Database {
      * the table if the table exist.
      */
     public Database(String databaseName) {
-        this.dataName = databaseName;
+        this.dataName = "./sample/src/main/java/org/openjfx/Database/" + databaseName + ".txt";
         try {
-            File datafile = new File("./sample/src/main/java/org/openjfx/Database/" + dataName + ".txt");
+            File datafile = new File(dataName);
             Scanner scr;
             if (datafile.exists()) {
                 scr = new Scanner(datafile);
@@ -36,7 +36,7 @@ public class Database {
                 datafile.createNewFile();
                 BufferedWriter writer = new BufferedWriter(new FileWriter(datafile));
                 writer.write(
-                        "Huy/null/Son/13/04/30/2001/012931/Student/Male/NO/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/NO/Hello/World/1234/Huy Son/1234/May/COMPLETE\n");
+                        "Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy Son/1234/May/COMPLETE\n");
                 scr = new Scanner(datafile);
                 System.err.println("File Exist not exist");
                 writer.close();
@@ -47,16 +47,44 @@ public class Database {
                 String mystring = scr.nextLine();
                 Immigrant tempImmigrantForm = new Immigrant();
                 Dependent tempDependentForm = new Dependent();
+                int i = 0;
                 String StringArray[] = mystring.split("/", 0);
-                tempImmigrantForm.setFirstName(StringArray[0]);
-                tempImmigrantForm.setMiddleName(StringArray[1]);
-                tempImmigrantForm.setMiddleName(StringArray[2]);
-                tempImmigrantForm.setLastName(StringArray[3]);
-                tempImmigrantForm.setAge(Integer.parseInt(StringArray[4]));
-                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[5]));
+                for (String s : StringArray) {
+                    System.out.println(s);
+                }
+                tempImmigrantForm.setFirstName(StringArray[i++]);
+                tempImmigrantForm.setMiddleName(StringArray[i++]);
+                tempImmigrantForm.setLastName(StringArray[i++]);
+                tempImmigrantForm.setAge(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setbirthYear(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setSSNumber(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setRace(StringArray[i++]);
+                tempImmigrantForm.setGender(StringArray[i++]);
+                tempImmigrantForm.setMarried(Boolean.parseBoolean(StringArray[i++]));
+                tempImmigrantForm.setPhoneNumber(StringArray[i++]);
+                tempImmigrantForm.setFather(StringArray[i++]);
+                tempImmigrantForm.setMother(StringArray[i++]);
+                tempImmigrantForm.setImmigrantPid(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setFirstName(StringArray[i++]);
+                tempImmigrantForm.setMiddleName(StringArray[i++]);
+                tempImmigrantForm.setLastName(StringArray[i++]);
+                tempImmigrantForm.setAge(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setbirthYear(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setSSNumber(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setRace(StringArray[i++]);
+                tempImmigrantForm.setGender(StringArray[i++]);
+                tempImmigrantForm.setMarried(Boolean.parseBoolean(StringArray[i++]));
+                tempImmigrantForm.setPhoneNumber(StringArray[i++]);
+                tempImmigrantForm.setFather(StringArray[i++]);
+                tempImmigrantForm.setMother(StringArray[i++]);
+                tempImmigrantForm.setImmigrantPid(Integer.parseInt(StringArray[i++]));
                 tempForm.setImmigrant(tempImmigrantForm);
                 tempForm.setDependent(tempDependentForm);
-                tempForm.setlastEdit(StringArray[StringArray.length - 1]);
+                tempForm.setlastEdit(StringArray[i++]);
 
             }
             scr.close();
@@ -80,12 +108,10 @@ public class Database {
         if (form == null) {
             return false;
         }
-        if (iForm == null || dForm == null) {
+        if (form.getImmigrant() == null || form.getDependent() == null) {
             return false;
         }
         boolean addDatatoFile = saveData(form);
-        iForm = null;
-        dForm = null;
         return addDatatoFile;
     }
 
@@ -147,5 +173,9 @@ public class Database {
 
     public String getDataName() {
         return dataName;
+    }
+
+    public void clear() {
+        DatabaseForms.clear();
     }
 }

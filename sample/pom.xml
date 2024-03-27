@@ -48,7 +48,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.3</version>
                 <configuration>
-                    <mainClass>org.openjfx.Business.Window</mainClass>
+                    <mainClass>org.openjfx.Workflow.Window</mainClass>
                 </configuration>
             </plugin>
         </plugins>

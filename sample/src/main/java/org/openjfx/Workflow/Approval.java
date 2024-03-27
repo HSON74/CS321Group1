@@ -4,6 +4,7 @@ import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
 
+import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -14,8 +15,7 @@ public class Approval {
         INPROGRESS, NEEDREVIEW, COMPLETE
     }
 
-    private Immigrant iForm;
-    private Dependent dForm;
+    private Form approvalForm;
     private Database database;
     private ApprovalStatus approvalStatus;
     private Workflow approvalWorkflow;
@@ -24,65 +24,71 @@ public class Approval {
     public Scene approvalScene;
 
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
-        iForm = form.getImmigrant();
-        dForm = form.getDependent();
+        this.approvalForm = form;
         this.approvalWorkflow = system;
         Button b = new Button();
         b.setText("Hello Do you Want Approval");
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         approvalScene = new Scene(layout, 960, 540);
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                tempclear();
+            }
+        });
 
     }
 
     public Approval(String dataBase, Form form) {
 
-        if (Immigrant.class.isInstance(form.getImmigrant())) {
-            iForm = form.getImmigrant();
-        }
-        if (Immigrant.class.isInstance(form.getDependent())) {
-            dForm = form.getDependent();
-        }
+        this.approvalForm = form;
+        setApprovalStatus(ApprovalStatus.INPROGRESS);
         setDatabase(dataBase);
 
     }
 
     public boolean checkFrom() {
-        if (iForm == null || dForm == null) {
+        if (approvalForm != null) {
             System.err.println("The immigrant or dependent form ");
+            return false;
         }
-        int iPid = iForm.getImmigrantPid();
-        int dPid = dForm.getDependentPid();
+        if (approvalForm != null) {
+            System.err.println("The immigrant or dependent form ");
+            return false;
+        }
+        int iPid = approvalForm.getImmigrant().getImmigrantPid();
+        int dPid = approvalForm.getDependent().getDependentPid();
         boolean isSystem = database.checkData(iPid, dPid);
         if (isSystem) {
-            return true;
+            setApprovalStatus(ApprovalStatus.NEEDREVIEW);
+            return false;
         }
-        return false;
-    }
-
-    public boolean connection() {
         return true;
     }
 
+    public boolean connection() {
+        if (checkFrom()) {
+            setApprovalStatus(ApprovalStatus.COMPLETE);
+            return database.addData(approvalForm);
+        } else {
+            return false;
+        }
+    }
+
     /* Setter and Getter for Approval Class */
-    public void setIForm(Immigrant immigrant) {
-        if (immigrant == null)
+    public void setForm(Form form) {
+        if (form == null)
             return;
-        iForm = immigrant;
-    }
-
-    public void setDForm(Dependent dependent) {
-        if (dependent == null)
+        if (form.getImmigrant() == null || form.getDependent() == null) {
+            System.err.println("file is missing");
             return;
-        dForm = dependent;
+        }
+        this.approvalForm = form;
     }
 
-    public Immigrant getImmigrant() {
-        return iForm;
-    }
-
-    public Dependent getDependent() {
-        return dForm;
+    public Form getForm() {
+        return approvalForm;
     }
 
     protected void setDatabase(String dataBase) {
@@ -103,5 +109,9 @@ public class Approval {
 
     public Workflow getWorkflow() {
         return approvalWorkflow;
+    }
+
+    public void tempclear() {
+        database.clear();
     }
 }
