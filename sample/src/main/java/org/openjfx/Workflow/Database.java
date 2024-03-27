@@ -1,5 +1,14 @@
 package org.openjfx.Workflow;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
@@ -8,7 +17,8 @@ public class Database {
 
     private Immigrant iForm; //
     private Dependent dForm; //
-    private String dataName;
+    private String dataName; //
+    protected ArrayList<Form> DatabaseForms;
 
     /*
      * Inital the table by create a table or access
@@ -16,6 +26,53 @@ public class Database {
      */
     public Database(String databaseName) {
         this.dataName = databaseName;
+        try {
+            File datafile = new File("./sample/src/main/java/org/openjfx/Database/" + dataName + ".txt");
+            Scanner scr;
+            if (datafile.exists()) {
+                scr = new Scanner(datafile);
+                System.err.println("File Exist");
+            } else {
+                datafile.createNewFile();
+                BufferedWriter writer = new BufferedWriter(new FileWriter(datafile));
+                writer.write(
+                        "Huy/null/Son/13/04/30/2001/012931/Student/Male/NO/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/NO/Hello/World/1234/Huy Son/1234/May/COMPLETE\n");
+                scr = new Scanner(datafile);
+                System.err.println("File Exist not exist");
+                writer.close();
+            }
+            DatabaseForms = new ArrayList<Form>();
+            while (scr.hasNextLine()) {
+                Form tempForm = new Form();
+                String mystring = scr.nextLine();
+                Immigrant tempImmigrantForm = new Immigrant();
+                Dependent tempDependentForm = new Dependent();
+                String StringArray[] = mystring.split("/", 0);
+                tempImmigrantForm.setFirstName(StringArray[0]);
+                tempImmigrantForm.setMiddleName(StringArray[1]);
+                tempImmigrantForm.setMiddleName(StringArray[2]);
+                tempImmigrantForm.setLastName(StringArray[3]);
+                tempImmigrantForm.setAge(Integer.parseInt(StringArray[4]));
+                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[5]));
+                tempForm.setImmigrant(tempImmigrantForm);
+                tempForm.setDependent(tempDependentForm);
+                tempForm.setlastEdit(StringArray[StringArray.length - 1]);
+
+            }
+            scr.close();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.err.println(e.toString());
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Database testbase = new Database("HuyTest");
+
+        // testbase.addData(new Form());
+
     }
 
     // Add the
@@ -27,6 +84,8 @@ public class Database {
             return false;
         }
         boolean addDatatoFile = saveData(form);
+        iForm = null;
+        dForm = null;
         return addDatatoFile;
     }
 
@@ -48,6 +107,19 @@ public class Database {
 
     private boolean saveData(Form inputForm) {
         if (inputForm.getDependent() == null || inputForm.getImmigrant() == null) {
+            return false;
+        }
+        String dataString = new String("");
+        dataString += inputForm.getImmigrant().getFirstName() + "/";
+        dataString += inputForm.getImmigrant().getMiddleName() + "/";
+        dataString += inputForm.getImmigrant().getLastName() + "/";
+        dataString += inputForm.getImmigrant().getAge() + "/";
+        try {
+            Files.write(Paths.get("./sample/src/main/java/org/openjfx/Database/" + dataName + ".txt"),
+                    dataString.getBytes(),
+                    StandardOpenOption.APPEND);
+        } catch (Exception e) {
+            // TODO: handle exception
             return false;
         }
         return true;
