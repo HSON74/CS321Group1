@@ -92,7 +92,7 @@ public class Approval {
     }
 
     protected void setDatabase(String dataBase) {
-        this.database = new Database(dataBase);
+        this.database = new Database(dataBase, null);
     }
 
     protected Database getDatabase() {
