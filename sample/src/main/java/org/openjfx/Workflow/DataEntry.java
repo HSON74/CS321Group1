@@ -22,6 +22,7 @@ public class DataEntry {
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         dataEntryScene = new Scene(layout, 960, 540);
+        dataEntryScene.getRoot().setStyle("-fx-font-family: 'serif'");
         b.setOnAction(e -> {
             DataEntryWorkflow.getReview().rDisplay(systemForm, DataEntryWorkflow, primaryStage);
             primaryStage.setScene(DataEntryWorkflow.getReview().rScene);

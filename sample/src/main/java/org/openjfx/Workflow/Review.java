@@ -23,6 +23,7 @@ public class Review {
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         rScene = new Scene(layout, 960, 540);
+        rScene.getRoot().setStyle("-fx-font-family: 'serif'");
         b.setOnAction(e -> {
             reviewWorkflow.getApproval().Adisplay(form, reviewWorkflow, primaryStage);
             primaryStage.setScene(reviewWorkflow.getApproval().approvalScene);

@@ -24,6 +24,7 @@ public class Window extends Application {
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         Scene scene = new Scene(layout, 960, 540);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(scene);
         b.setOnAction(e -> {
             WindowWorkflow = new Workflow();

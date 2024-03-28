@@ -31,6 +31,7 @@ public class Approval {
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         approvalScene = new Scene(layout, 960, 540);
+        approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent e) {
