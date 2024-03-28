@@ -43,15 +43,15 @@ public class Immigrant extends Person {
         this.age = age;
     }
 
-    public void birthMonth(int birthMonth) {
+    public void setBirthMonth(int birthMonth) {
         this.birthMonth = birthMonth;
     }
 
-    public void setbirthDay(int birthDay) {
+    public void setBirthDay(int birthDay) {
         this.birthDay = birthDay;
     }
 
-    public void setbirthYear(int birthYear) {
+    public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
     }
 

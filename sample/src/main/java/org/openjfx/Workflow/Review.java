@@ -11,7 +11,7 @@ import javafx.scene.layout.*;
 import javafx.geometry.*;
 
 public class Review {
-    public Scene rScene;
+    protected Scene rScene;
     protected Workflow reviewWorkflow;
     protected Form reviewForm;
 
@@ -29,7 +29,7 @@ public class Review {
         });
     }
 
-    public void Revalidate(Form file) {
+    public void revalidate(Form file) {
         if (file.getFormStatus() != FormStatus.COMPLETE) {
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
@@ -50,19 +50,64 @@ public class Review {
             layout.getChildren().addAll(label, button);
             layout.setAlignment(Pos.CENTER);
             Scene scene = new Scene(layout);
+            reviewWorkflow.addScene(scene);
             window.setScene(scene);
             window.show();
             reviewWorkflow.returnForm();
         }
         else {
-            Reviewdata(file);
+            reviewdata(file);
         }
     }
 
-    public void Reviewdata(Form file) {
+    public void reviewdata(Form file) {
         Immigrant immigrant = file.getImmigrant();
         Dependent dependent = file.getDependent();
-        
+        // Immigrant Label
+        StackPane stack = new StackPane();
+        Label immi = new Label();
+        immi.setText("Immigrant Form");
+        // Immigrant Name
+        Label immiName = new Label();
+        if ((immigrant.getMiddleName()).equals(null)) immiName.setText("Full Name: " + immigrant.getFirstName() + " " + immigrant.getLastName());
+        else immiName.setText("Full Name: " + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
+        // Immigrant Age
+        Label immiAge = new Label();
+        immiAge.setText("Age: " + immigrant.getAge());
+        // Immigrant Birthday
+        /**
+         * Label immiBirth = new Label();
+         * immiBirth.setText("Birthday: " + immigrant.getBirthMonth() + "/" + immigrant.getBirthDay() + "/" + immigrant.getBirthYear());
+         */
+        // Immigrant SS Number
+        /**
+         * Label immiSS = new Label();
+         * immiSS.setText("Social Security Number: " + immigrant.getSSNumber()");
+         */
+        // Immigrant Race
+        /**
+         * Label immiRace = new Label();
+         * immiRace.setText("Race: " + immigrant.getRace());
+         */
+        // Immigrant Gender
+        /**
+         * Label immiGender = new Label();
+         * immiBirth.setText("Gender: " + immigrant.getGender()");
+         */
+        // Immigrant Marriage
+        /**
+         * Label immiMarriage = new Label();
+         * immiBirth.setText("Marriage Status: " + immigrant.getMarried()");
+         */
+        // Immigrant Phone Number
+        /**
+         * Label immiPhone = new Label();
+         * immiPhone.setText("Phone Number: " + immigrant.getPhoneNumber()");
+         */
+        stack.getChildren().addAll(immi, immiName, immiAge);
+        Scene scene = new Scene(stack);
+        setScene(scene);
+        reviewWorkflow.addScene(scene);
     }
     /*
      * Setter and Getter for Review class.

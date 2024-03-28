@@ -56,9 +56,9 @@ public class Database {
                 tempImmigrantForm.setMiddleName(StringArray[i++]);
                 tempImmigrantForm.setLastName(StringArray[i++]);
                 tempImmigrantForm.setAge(Integer.parseInt(StringArray[i++]));
-                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
-                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
-                tempImmigrantForm.setbirthYear(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setBirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setBirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setBirthYear(Integer.parseInt(StringArray[i++]));
                 tempImmigrantForm.setSSNumber(Integer.parseInt(StringArray[i++]));
                 tempImmigrantForm.setRace(StringArray[i++]);
                 tempImmigrantForm.setGender(StringArray[i++]);
@@ -71,9 +71,9 @@ public class Database {
                 tempImmigrantForm.setMiddleName(StringArray[i++]);
                 tempImmigrantForm.setLastName(StringArray[i++]);
                 tempImmigrantForm.setAge(Integer.parseInt(StringArray[i++]));
-                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
-                tempImmigrantForm.setbirthDay(Integer.parseInt(StringArray[i++]));
-                tempImmigrantForm.setbirthYear(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setBirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setBirthDay(Integer.parseInt(StringArray[i++]));
+                tempImmigrantForm.setBirthYear(Integer.parseInt(StringArray[i++]));
                 tempImmigrantForm.setSSNumber(Integer.parseInt(StringArray[i++]));
                 tempImmigrantForm.setRace(StringArray[i++]);
                 tempImmigrantForm.setGender(StringArray[i++]);
