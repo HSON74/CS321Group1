@@ -24,17 +24,14 @@ public class Approval {
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         this.approvalForm = form;
         this.approvalWorkflow = system;
-        approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
+
         Button b = new Button();
         b.setText("Hello Do you Want Approval");
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
-
-        ScrollPane appScrollpan = new ScrollPane();
-        appScrollpan.setContent(layout);
-
         approvalScene = new Scene(layout, 960, 540);
         primaryStage.setScene(approvalScene);
+        approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
 
     }
 
