@@ -21,7 +21,7 @@ public class Workflow {
     protected Approval workflowApproval;
     protected DataEntry workflowDataEntry;
     protected Database workflowDatabase;
-    public List<Scene> sceneArray;
+    protected static List<Scene> sceneArray;
 
     // This is the workflow constructor if there's already a form
     public Workflow(Form form) {
@@ -38,18 +38,20 @@ public class Workflow {
         workflowApproval = new Approval(null, workflowDataEntry.systemForm);
     }
 
-    public void initSceneArray(Scene titleScene) {
+    public static void initSceneArray(Scene titleScene) {
         sceneArray = new ArrayList<>();
         sceneArray.add(titleScene);
     }
+    
+    public static Scene getScene(int index) {
+        return sceneArray.get(index);
+    }
 
-    public void addScene(Scene scene) {
+    public static void addScene(Scene scene) {
         sceneArray.add(scene);
     }
 
-    public void removeScene(int scene) {
-        if (scene > sceneArray.size()) System.err.println("Index out of bounds!!!");
-        else if (scene < 0) System.err.println("Value cannot be less than 0");
+    public static void removeScene(Scene scene) {
         sceneArray.remove(scene);
     }
 

@@ -17,7 +17,7 @@ public class Initiate {
 
     public boolean registerPerson(Form form) {
         // Workflow for review and approval
-        return system.Submit(form);
+        return system.submit(form);
     }
 
     /* Setter and Getter for Initiate Class */
