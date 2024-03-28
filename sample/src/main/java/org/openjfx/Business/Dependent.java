@@ -17,15 +17,24 @@ public class Dependent extends Immigrant {
         this.prevClaim = prevClaim;
     }
 
-    public boolean setPrevClaim() {
-        return prevClaim;
-    }
-
     public void setDependentPid(int pid) {
         this.dependentPid = pid;
     }
 
+    public void setemploymentStatus(boolean employmentStatus){
+        this.employmentStatus = employmentStatus;
+    }
+    
     public int getDependentPid() {
         return dependentPid;
     }
+
+    public boolean getPrevClaim(){
+        return prevClaim;
+    }
+
+    public boolean getemploymentStatus(){
+        return employmentStatus;
+    }
+    
 }
