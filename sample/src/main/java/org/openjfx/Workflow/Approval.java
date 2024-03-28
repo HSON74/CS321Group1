@@ -7,6 +7,8 @@ import org.openjfx.Business.Immigrant;
 import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.*;
 
@@ -30,13 +32,12 @@ public class Approval {
         b.setText("Hello Do you Want Approval");
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
+
+        ScrollPane appScrollpan = new ScrollPane();
+        appScrollpan.setContent(layout);
+
         approvalScene = new Scene(layout, 960, 540);
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                tempclear();
-            }
-        });
+        primaryStage.setScene(approvalScene);
 
     }
 
@@ -92,7 +93,7 @@ public class Approval {
     }
 
     protected void setDatabase(String dataBase) {
-        this.database = new Database(dataBase);
+        this.database = new Database(dataBase, null);
     }
 
     protected Database getDatabase() {
@@ -111,7 +112,4 @@ public class Approval {
         return approvalWorkflow;
     }
 
-    public void tempclear() {
-        database.clear();
-    }
 }
