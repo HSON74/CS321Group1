@@ -22,6 +22,7 @@ public class Workflow {
     protected DataEntry workflowDataEntry;
     protected Database workflowDatabase;
     protected List<Scene> sceneArray;
+    protected List<Integer> wfItems;
 
     // This is the workflow constructor if there's already a form
     public Workflow(Form form) {
@@ -84,8 +85,9 @@ public class Workflow {
         return true;
     }
 
-    public boolean getCheck(Form form) {
-        return true;
+    public boolean getCheck(String string) {
+        if (string.equals("Success")) return true;
+        else return false;
     }
 
     public Form generateForm() {
