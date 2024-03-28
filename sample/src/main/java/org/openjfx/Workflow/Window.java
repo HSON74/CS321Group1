@@ -31,6 +31,7 @@ public class Window extends Application {
                     WindowWorkflow,
                     primaryStage);
             primaryStage.setScene(WindowWorkflow.getDataEntry().dataEntryScene);
+            WindowWorkflow.InitSceneArray(scene);
         });
         primaryStage.show();
 

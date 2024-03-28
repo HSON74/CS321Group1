@@ -1,11 +1,14 @@
 package org.openjfx.Workflow;
 
+import org.openjfx.Business.Immigrant;
+import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
+import org.openjfx.Business.FormStatus;
+import javafx.stage.*;
 import javafx.scene.*;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import java.time.LocalDateTime;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.geometry.*;
 
 public class Review {
     public Scene rScene;
@@ -27,10 +30,39 @@ public class Review {
     }
 
     public void Revalidate(Form file) {
+        if (file.getFormStatus() != FormStatus.COMPLETE) {
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Error Message:");
+            window.setMinWidth(250);
+            Label label = new Label();
+            if (file.getFormStatus() == FormStatus.EMPTY) {
+                System.err.println("Error! Form is empty!");
+                label.setText("Error! Form is empty!");
+            }
+            else if (file.getFormStatus() != FormStatus.INPROGRESS) {
+                System.err.println("Error! Some fields have not been fully filled out!");
+                label.setText("Error! Some fields have not been fully filled out!");
+            }
+            Button button = new Button("OK");
+            button.setOnAction(e->window.close());
+            VBox layout = new VBox(10);
+            layout.getChildren().addAll(label, button);
+            layout.setAlignment(Pos.CENTER);
+            Scene scene = new Scene(layout);
+            window.setScene(scene);
+            window.show();
+            reviewWorkflow.ReturnForm();
+        }
+        else {
+            Reviewdata(file);
+        }
     }
 
-    public void Reviewdate(Form file) {
-        LocalDateTime date = LocalDateTime.now();
+    public void Reviewdata(Form file) {
+        Immigrant immigrant = file.getImmigrant();
+        Dependent dependent = file.getDependent();
+        
     }
     /*
      * Setter and Getter for Review class.

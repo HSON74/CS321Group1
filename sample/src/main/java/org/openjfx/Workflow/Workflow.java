@@ -1,8 +1,18 @@
 package org.openjfx.Workflow;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openjfx.Database.*;
 import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class Workflow {
     private Integer wfid;
@@ -10,27 +20,46 @@ public class Workflow {
     private Integer objid;
     protected Review workflowReview;
     protected Approval workflowApproval;
-    protected DataEntry workfDataEntry;
+    protected DataEntry workflowDataEntry;
+    protected Database workflowDatabase;
+    private List<Scene> SceneArray;
 
     // This is the workflow constructor if there's already a form
     public Workflow(Form form) {
-        workfDataEntry = new DataEntry(this);
+        workflowDataEntry = new DataEntry(this);
         workflowReview = new Review();
         workflowApproval = new Approval(null, form);
     }
 
     // This constructor is for when a new form is being created at the start of the class
     public Workflow() {
-        workfDataEntry = new DataEntry(this);
-        workfDataEntry.startProcess();
+        workflowDataEntry = new DataEntry(this);
+        workflowDataEntry.startProcess();
         workflowReview = new Review();
-        workflowApproval = new Approval(null, workfDataEntry.systemForm);
+        workflowApproval = new Approval(null, workflowDataEntry.systemForm);
+    }
+
+    public void InitSceneArray(Scene TitleScene) {
+        SceneArray = new ArrayList<Scene>();
+        SceneArray.add(TitleScene);
+    }
+
+    public void addScene(StackPane layout) {
+        Scene newScene = new Scene(layout, 100, 100);
+        SceneArray.add(newScene);
+    }
+
+    public void removeScene(int scene) {
+        if (scene > SceneArray.size()) System.err.println("Index out of bounds!!!");
+        else if (scene < 0) System.err.println("Value cannot be less than 0");
+        SceneArray.remove(scene);
     }
 
     // This method is for when a new workflow item is being added
     public Boolean AddWFItem(String step, Integer onjid) {
-        if (step != getStep()) {
+        if ((step != getStep())&&(objid != getObjid())) {
             setStep(step);
+            setObjid(onjid);
         }
         else {
             return false;
@@ -51,7 +80,7 @@ public class Workflow {
     }
 
     public boolean Submit(Form form) {
-        
+        workflowReview.Revalidate(form);
         return true;
     }
 
@@ -104,6 +133,6 @@ public class Workflow {
     }
 
     public DataEntry getDataEntry() {
-        return workfDataEntry;
+        return workflowDataEntry;
     }
 }
