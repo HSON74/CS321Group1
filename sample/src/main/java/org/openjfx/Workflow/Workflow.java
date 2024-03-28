@@ -21,7 +21,7 @@ public class Workflow {
     protected Approval workflowApproval;
     protected DataEntry workflowDataEntry;
     protected Database workflowDatabase;
-    private List<Scene> SceneArray;
+    public List<Scene> sceneArray;
 
     // This is the workflow constructor if there's already a form
     public Workflow(Form form) {
@@ -38,25 +38,24 @@ public class Workflow {
         workflowApproval = new Approval(null, workflowDataEntry.systemForm);
     }
 
-    public void InitSceneArray(Scene TitleScene) {
-        SceneArray = new ArrayList<Scene>();
-        SceneArray.add(TitleScene);
+    public void initSceneArray(Scene titleScene) {
+        sceneArray = new ArrayList<>();
+        sceneArray.add(titleScene);
     }
 
-    public void addScene(StackPane layout) {
-        Scene newScene = new Scene(layout, 100, 100);
-        SceneArray.add(newScene);
+    public void addScene(Scene scene) {
+        sceneArray.add(scene);
     }
 
     public void removeScene(int scene) {
-        if (scene > SceneArray.size()) System.err.println("Index out of bounds!!!");
+        if (scene > sceneArray.size()) System.err.println("Index out of bounds!!!");
         else if (scene < 0) System.err.println("Value cannot be less than 0");
-        SceneArray.remove(scene);
+        sceneArray.remove(scene);
     }
 
     // This method is for when a new workflow item is being added
-    public Boolean AddWFItem(String step, Integer onjid) {
-        if ((step != getStep())&&(objid != getObjid())) {
+    public Boolean addWFItem(String step, Integer onjid) {
+        if ((!step.equals(getStep()))&&(!objid.equals(getObjid()))) {
             setStep(step);
             setObjid(onjid);
         }
@@ -66,19 +65,19 @@ public class Workflow {
         return true;
     }
 
-    public Integer GetNextWFItem(String step) {
+    public Integer getNextWFItem(String step) {
         return Integer.parseInt(step);
     }
 
-    public Integer CountWFItems(String step) {
+    public Integer countWFItems(String step) {
         return 0;
     }
 
-    public Form ReturnForm() {
+    public Form returnForm() {
         return new Form();
     }
 
-    public boolean Submit(Form form) {
+    public boolean submit(Form form) {
         workflowReview.Revalidate(form);
         return true;
     }

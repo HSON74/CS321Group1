@@ -52,7 +52,7 @@ public class Review {
             Scene scene = new Scene(layout);
             window.setScene(scene);
             window.show();
-            reviewWorkflow.ReturnForm();
+            reviewWorkflow.returnForm();
         }
         else {
             Reviewdata(file);
