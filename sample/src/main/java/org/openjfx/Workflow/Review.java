@@ -63,48 +63,59 @@ public class Review {
     public void reviewdata(Form file) {
         Immigrant immigrant = file.getImmigrant();
         Dependent dependent = file.getDependent();
-        // Immigrant Label
         StackPane stack = new StackPane();
+        // Title
+        Label title = new Label();
+        title.setText("Review");
+        // Immigrant Label
         Label immi = new Label();
         immi.setText("Immigrant Form");
         // Immigrant Name
         Label immiName = new Label();
-        if ((immigrant.getMiddleName()).equals(null)) immiName.setText("Full Name: " + immigrant.getFirstName() + " " + immigrant.getLastName());
-        else immiName.setText("Full Name: " + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
+        if (immigrant.getMiddleName() == null) immiName.setText("Name: " + immigrant.getFirstName() + " " + immigrant.getLastName());
+        else immiName.setText("Name: " + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
         // Immigrant Age
         Label immiAge = new Label();
         immiAge.setText("Age: " + immigrant.getAge());
         // Immigrant Birthday
-        /**
-         * Label immiBirth = new Label();
-         * immiBirth.setText("Birthday: " + immigrant.getBirthMonth() + "/" + immigrant.getBirthDay() + "/" + immigrant.getBirthYear());
-         */
+        Label immiBirth = new Label();
+        immiBirth.setText("Birthday: " + immigrant.getbirthMonth() + "/" + immigrant.getbirthDay() + "/" + immigrant.getbirthYear());
+        // Immigrant Address
+        Label immiAddress = new Label();
+        immiAddress.setText("Address: " + immigrant.getAddress());
         // Immigrant SS Number
-        /**
-         * Label immiSS = new Label();
-         * immiSS.setText("Social Security Number: " + immigrant.getSSNumber()");
-         */
+        Label immiSS = new Label();
+        immiSS.setText("Social Security Number: " + immigrant.getSSNumber());
         // Immigrant Race
-        /**
-         * Label immiRace = new Label();
-         * immiRace.setText("Race: " + immigrant.getRace());
-         */
+        Label immiRace = new Label();
+        immiRace.setText("Race: " + immigrant.getRace());
         // Immigrant Gender
-        /**
-         * Label immiGender = new Label();
-         * immiBirth.setText("Gender: " + immigrant.getGender()");
-         */
+        Label immiGender = new Label();
+        immiGender.setText("Gender: " + immigrant.getGender());
         // Immigrant Marriage
-        /**
-         * Label immiMarriage = new Label();
-         * immiBirth.setText("Marriage Status: " + immigrant.getMarried()");
-         */
+        Label immiMarriage = new Label();
+        immiMarriage.setText("Marriage Status: " + immigrant.getMarriedStatus());
         // Immigrant Phone Number
-        /**
-         * Label immiPhone = new Label();
-         * immiPhone.setText("Phone Number: " + immigrant.getPhoneNumber()");
-         */
-        stack.getChildren().addAll(immi, immiName, immiAge);
+        Label immiPhone = new Label();
+        immiPhone.setText("Phone Number: " + immigrant.getPhoneNumber());
+        // Immigrant's Father
+        Label immiFather = new Label();
+        immiFather.setText("Father: " + immigrant.getFatherName());
+        // Immigrant's Mother
+        Label immiMother = new Label();
+        immiMother.setText("Mother: " + immigrant.getMotherName());
+        // Immigrant's Employment Status
+        Label immiJob = new Label();
+        immiJob.setText("Occupation: " + immigrant.getemploymentStatus());
+        // Dependent Label
+        Label dep = new Label();
+        dep.setText("Dependent Form");
+        // Dependent's Employment Status
+        Label depJob = new Label();
+        depJob.setText("Occupation: " + dependent.getemploymentStatus());
+        stack.getChildren().addAll(immi, immiName, immiAge, immiBirth, immiAddress,
+        immiSS, immiRace, immiGender, immiMarriage, immiFather, immiMother, immiJob,
+        dep, depJob);
         Scene scene = new Scene(stack);
         setScene(scene);
         reviewWorkflow.addScene(scene);
