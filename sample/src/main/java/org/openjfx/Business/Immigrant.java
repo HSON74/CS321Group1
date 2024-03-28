@@ -2,6 +2,7 @@ package org.openjfx.Business;
 
 public class Immigrant extends Person {
     private int ImmigrantPid;
+    private int DependentPid; //references the dependent to claim
 
     public Dependent getDependent() {
         return new Dependent();
@@ -19,9 +20,6 @@ public class Immigrant extends Person {
         return true;
     }
 
-    public void employmentStatus() {
-
-    }
 
     /*
      * Setter and Getter Methods for the Immigrant class
@@ -63,6 +61,10 @@ public class Immigrant extends Person {
         this.ImmigrantPid = pid;
     }
 
+    public void setDependentPid(int dependentPid){
+        this.DependentPid = dependentPid;
+    }
+
     public void setRace(String race) {
         this.race = race;
     }
@@ -87,15 +89,25 @@ public class Immigrant extends Person {
         this.motherName = motherName;
     }
 
-    public String getFirstName() {
-        return fatherName;
+    public void setAddress(String address){
+        this.address = address;
     }
 
-    public String getMiddleName() {
+    public void setemploymentStatus(boolean employmentStatus) {
+        this.employmentStatus = employmentStatus;
+    }
+
+    //..............getter methods................
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getMiddleName(){
         return middleName;
     }
 
-    public String getLastName() {
+    public String getLastName(){
         return lastName;
     }
 
@@ -103,7 +115,59 @@ public class Immigrant extends Person {
         return age;
     }
 
+    public int getbirthMonth(){
+        return birthMonth;
+    }
+    
+    public int getbirthDay(){
+        return birthDay;
+    }
+
+    public int getbirthYear(){
+        return birthYear;
+    }
+
+    public int getSSNumber(){
+        return ssnumber;
+    }
+
     public int getImmigrantPid() {
         return ImmigrantPid;
+    }
+
+    public int getDependentPid(){
+        return DependentPid;
+    }
+
+    public String getRace(){
+        return race;
+    }
+
+    public String getGender(){
+        return gender;
+    }
+    
+    public boolean getMarriedStatus(){
+        return married;
+    }
+
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+
+    public String getFatherName(){
+        return fatherName;
+    }
+
+    public String getMotherName(){
+        return motherName;
+    }
+
+    public String getAddress(){
+        return address;
+    }
+
+    public boolean getemploymentStatus() {
+        return employmentStatus;
     }
 }

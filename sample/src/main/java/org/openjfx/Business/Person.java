@@ -15,5 +15,7 @@ public class Person {
     protected String phoneNumber;
     protected String motherName;
     protected String fatherName;
+    protected String address;
+    protected boolean employmentStatus;
 
 }
