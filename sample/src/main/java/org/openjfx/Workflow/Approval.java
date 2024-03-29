@@ -5,7 +5,9 @@ import org.openjfx.Business.Form;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.*;
 
 public class Approval {
@@ -24,12 +26,20 @@ public class Approval {
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         this.approvalForm = form;
         this.approvalWorkflow = system;
-
+        int x_grid = 10;
+        int y_grid = 50;
+        GridPane approvalGridPane = new GridPane();
+        ScrollPane approvalScrollPane = new ScrollPane();
+        approvalGridPane.setHgap(10);
+        approvalGridPane.setVgap(50);
         Button b = new Button();
         b.setText("Hello Do you Want Approval");
-        StackPane layout = new StackPane();
-        layout.getChildren().add(b);
-        approvalScene = new Scene(layout, 960, 540);
+        // StackPane layout = new StackPane();
+        // layout.getChildren().add(b);
+        // approvalGridPane.add(b, x_grid, 1);
+        approvalScrollPane.setContent(b);
+        approvalGridPane.add(approvalScrollPane, x_grid / 2, y_grid / 2);
+        approvalScene = new Scene(approvalGridPane, 960, 540);
         primaryStage.setScene(approvalScene);
         approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
 

@@ -28,6 +28,7 @@ public class Window extends Application {
         primaryStage.setScene(scene);
         b.setOnAction(e -> {
             WindowWorkflow = new Workflow();
+            WindowWorkflow.getDataEntry().systemForm = WindowWorkflow.generateForm();
             WindowWorkflow.getDataEntry().dataEntryScene(WindowWorkflow.getDataEntry().systemForm,
                     WindowWorkflow,
                     primaryStage);
