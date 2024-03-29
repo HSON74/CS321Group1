@@ -11,17 +11,16 @@ import java.util.Scanner;
 
 import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
-import org.openjfx.Business.FormStatus;
 import org.openjfx.Business.Immigrant;
 
 public class Database {
 
     private Immigrant iForm; //
     private Dependent dForm; //
-    private String dataImmigrantName; //
-    private String dataDependentName; //
-    protected ArrayList<Immigrant> dabaseFormsForImmigrant;
-    protected ArrayList<Dependent> databaseFormsForDependent;
+    private String dataNameForImmigrant; //
+    private String dataNameForDependent; //
+    protected ArrayList<Immigrant> databaseRecordImmigrant;
+    protected ArrayList<Dependent> databaseRecordDependent;
 
     /*
      * Inital the table by create a table or access
@@ -29,18 +28,16 @@ public class Database {
      */
     public Database(String databaseNameImmigrant, String databaseNameDependent) {
         if (databaseNameImmigrant == null) {
-            this.dataImmigrantName = "./sample/src/main/java/org/openjfx/Database/" + "ImmigrantRecord" + ".txt";
-        } else {
-            this.dataImmigrantName = "./sample/src/main/java/org/openjfx/Database/" + this.dataImmigrantName + ".txt";
+            databaseNameImmigrant = "ImmigrantRecord";
         }
-        if (databaseNameImmigrant == null) {
-            this.dataDependentName = "./sample/src/main/java/org/openjfx/Database/" + "DependentRecord" + ".txt";
-        } else {
-            this.dataDependentName = "./sample/src/main/java/org/openjfx/Database/" + this.dataDependentName + ".txt";
+        if (databaseNameDependent == null) {
+            databaseNameImmigrant = "DependentRecord";
         }
+        this.dataNameForImmigrant = "./sample/src/main/java/org/openjfx/Database/" + databaseNameImmigrant + ".txt";
+        this.dataNameForDependent = "./sample/src/main/java/org/openjfx/Database/" + databaseNameDependent + ".txt";
 
         try {
-            File datafile = new File(dataImmigrantName);
+            File datafile = new File(dataNameForImmigrant);
             Scanner scr;
             if (datafile.exists()) {
                 scr = new Scanner(datafile);
@@ -48,48 +45,77 @@ public class Database {
             } else {
                 datafile.createNewFile();
                 BufferedWriter writer = new BufferedWriter(new FileWriter(datafile));
-                // writer.write(
-                // "Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy
-                // Son/1234/May/COMPLETE\n");
                 scr = new Scanner(datafile);
                 System.err.println("File Exist not exist");
                 writer.close();
             }
-            dabaseFormsForImmigrant = new ArrayList<Immigrant>();
+            databaseRecordImmigrant = new ArrayList<Immigrant>();
             while (scr.hasNextLine()) {
-                Immigrant tmpImmigrant = new Immigrant();
                 String mystring = scr.nextLine();
                 Immigrant tempImmigrantForm = new Immigrant();
-                Dependent tempDependentForm = new Dependent();
                 int i = 0;
-                String StringArray[] = mystring.split("/", 0);
+                String stringArray[] = mystring.split("/", 0);
+                tempImmigrantForm.setFirstName(stringArray[i++]);
+                if (stringArray[i] == null) {
+                    tempImmigrantForm.setMiddleName(stringArray[i++]);
+                }
+                tempImmigrantForm.setLastName(stringArray[i++]);
+                tempImmigrantForm.setAge(Integer.parseInt(stringArray[i++]));
+                tempImmigrantForm.setAddress(stringArray[i++]);
+                tempImmigrantForm.setPhoneNumber(stringArray[i++]);
+                tempImmigrantForm.setbirthMonth(Integer.parseInt(stringArray[i++]));
+                tempImmigrantForm.setbirthDay(Integer.parseInt(stringArray[i++]));
+                tempImmigrantForm.setbirthYear(Integer.parseInt(stringArray[i++]));
+                tempImmigrantForm.setemploymentStatus(Boolean.parseBoolean(stringArray[i++]));
+                tempImmigrantForm.setMarried(Boolean.parseBoolean(stringArray[i++]));
+                tempImmigrantForm.setFather(stringArray[i++]);
+                tempImmigrantForm.setMother(stringArray[i++]);
+                tempImmigrantForm.setGender(stringArray[i++]);
+                tempImmigrantForm.setRace(stringArray[i++]);
+                tempImmigrantForm.setSSNumber(Integer.parseInt(stringArray[i++]));
+                tempImmigrantForm.setImmigrantPid(Integer.parseInt(stringArray[i++]));
+                tempImmigrantForm.setDependentPid(Integer.parseInt(stringArray[i++]));
 
             }
             scr.close();
-
-            // Scannering second Database for Dependent
             if (datafile.exists()) {
                 scr = new Scanner(datafile);
                 System.err.println("File Exist");
             } else {
                 datafile.createNewFile();
                 BufferedWriter writer = new BufferedWriter(new FileWriter(datafile));
-                // writer.write(
-                // "Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy
-                // Son/1234/May/COMPLETE\n");
                 scr = new Scanner(datafile);
                 System.err.println("File Exist not exist");
                 writer.close();
             }
-            databaseFormsForDependent = new ArrayList<Dependent>();
-
+            datafile = new File(databaseNameDependent);
+            databaseRecordDependent = new ArrayList<Dependent>();
             while (scr.hasNextLine()) {
-                Dependent tmpImmigrant = new Dependent();
                 String mystring = scr.nextLine();
-                Immigrant tempImmigrantForm = new Immigrant();
                 Dependent tempDependentForm = new Dependent();
                 int i = 0;
-                String StringArray[] = mystring.split("/", 0);
+                String stringArray[] = mystring.split("/", 0);
+                tempDependentForm.setFirstName(stringArray[i++]);
+                if (stringArray[i] == null) {
+                    tempDependentForm.setMiddleName(stringArray[i++]);
+                }
+                tempDependentForm.setLastName(stringArray[i++]);
+                tempDependentForm.setAge(Integer.parseInt(stringArray[i++]));
+                tempDependentForm.setAddress(stringArray[i++]);
+                tempDependentForm.setPhoneNumber(stringArray[i++]);
+                tempDependentForm.setbirthMonth(Integer.parseInt(stringArray[i++]));
+                tempDependentForm.setbirthDay(Integer.parseInt(stringArray[i++]));
+                tempDependentForm.setbirthYear(Integer.parseInt(stringArray[i++]));
+                tempDependentForm.setemploymentStatus(Boolean.parseBoolean(stringArray[i++]));
+                tempDependentForm.setMarried(Boolean.parseBoolean(stringArray[i++]));
+                tempDependentForm.setFather(stringArray[i++]);
+                tempDependentForm.setMother(stringArray[i++]);
+                tempDependentForm.setGender(stringArray[i++]);
+                tempDependentForm.setRace(stringArray[i++]);
+                tempDependentForm.setSSNumber(Integer.parseInt(stringArray[i++]));
+                tempDependentForm.setPrevClaim(Boolean.parseBoolean(mystring));
+                tempDependentForm.setImmigrantPid(Integer.parseInt(stringArray[i++]));
+                tempDependentForm.setDependentPid(Integer.parseInt(stringArray[i++]));
 
             }
             scr.close();
@@ -102,7 +128,7 @@ public class Database {
     }
 
     public static void main(String[] args) {
-        Database testbase = new Database("HuyTest", "HuyDependent");
+        Database testbase = new Database("HuyTest", null);
 
         // testbase.addData(new Form());
 
@@ -127,41 +153,76 @@ public class Database {
     }
 
     public Immigrant getDataImmigrant(int iPID) {
-        Immigrant dataImmigrant = new Immigrant();
-
-        return dataImmigrant;
+        for (int i = 0; i < databaseRecordImmigrant.size(); i++) {
+            if (databaseRecordImmigrant.get(i).getImmigrantPid() == iPID) {
+                return databaseRecordImmigrant.get(i);
+            }
+        }
+        return null;
     }
 
     public Dependent getDataDependent(int iPID) {
-        Dependent dataDependent = new Dependent();
-
-        return dataDependent;
+        for (int i = 0; i < databaseRecordDependent.size(); i++) {
+            if (databaseRecordDependent.get(i).getImmigrantPid() == iPID) {
+                return databaseRecordDependent.get(i);
+            }
+        }
+        return null;
     }
 
     private boolean saveData(Form inputForm) {
         if (inputForm.getDependent() == null || inputForm.getImmigrant() == null) {
             return false;
         }
-        String dataStringImmigrant = new String("");
-        dataStringImmigrant += inputForm.getImmigrant().getFirstName() + "/";
+        String dataStringImmigrant = null;
+        dataStringImmigrant = inputForm.getImmigrant().getFirstName() + "/";
         dataStringImmigrant += inputForm.getImmigrant().getMiddleName() + "/";
         dataStringImmigrant += inputForm.getImmigrant().getLastName() + "/";
         dataStringImmigrant += inputForm.getImmigrant().getAge() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getAddress() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getPhoneNumber() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getbirthMonth() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getbirthDay() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getbirthYear() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getemploymentStatus() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getMarriedStatus() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getFatherName() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getMotherName() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getGender() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getRace() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getSSNumber() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getImmigrantPid() + "/";
+        dataStringImmigrant += inputForm.getImmigrant().getDependentPid();
 
-        String dataStringDependent = new String("");
-        dataStringDependent += inputForm.getImmigrant().getFirstName() + "/";
-        dataStringDependent += inputForm.getImmigrant().getMiddleName() + "/";
-        dataStringDependent += inputForm.getImmigrant().getLastName() + "/";
-        dataStringDependent += inputForm.getImmigrant().getAge() + "/";
+        String dataStringDependent = null;
+        dataStringDependent = inputForm.getDependent().getFirstName() + "/";
+        dataStringDependent += inputForm.getDependent().getMiddleName() + "/";
+        dataStringDependent += inputForm.getDependent().getLastName() + "/";
+        dataStringDependent += inputForm.getDependent().getAge() + "/";
+        dataStringDependent += inputForm.getDependent().getAddress() + "/";
+        dataStringDependent += inputForm.getDependent().getPhoneNumber() + "/";
+        dataStringDependent += inputForm.getDependent().getbirthMonth() + "/";
+        dataStringDependent += inputForm.getDependent().getbirthDay() + "/";
+        dataStringDependent += inputForm.getDependent().getbirthYear() + "/";
+        dataStringDependent += inputForm.getDependent().getemploymentStatus() + "/";
+        dataStringDependent += inputForm.getDependent().getMarriedStatus() + "/";
+        dataStringDependent += inputForm.getDependent().getFatherName() + "/";
+        dataStringDependent += inputForm.getDependent().getMotherName() + "/";
+        dataStringDependent += inputForm.getDependent().getGender() + "/";
+        dataStringDependent += inputForm.getDependent().getRace() + "/";
+        dataStringDependent += inputForm.getDependent().getSSNumber() + "/";
+        dataStringDependent += inputForm.getDependent().getPrevClaim() + "/";
+        dataStringDependent += inputForm.getDependent().getImmigrantPid() + "/";
+        dataStringDependent += inputForm.getDependent().getDependentPid();
+
         try {
-            Files.write(Paths.get(dataImmigrantName),
+            Files.write(Paths.get(dataNameForImmigrant),
                     dataStringImmigrant.getBytes(),
                     StandardOpenOption.APPEND);
-            Files.write(Paths.get(dataDependentName),
+            Files.write(Paths.get(dataNameForDependent),
                     dataStringDependent.getBytes(),
                     StandardOpenOption.APPEND);
         } catch (Exception e) {
-            // TODO: handle exception
             return false;
         }
         return true;
@@ -180,18 +241,6 @@ public class Database {
     }
 
     public void updateDependent(Dependent dependent) {
-
-    }
-
-    public void setDataName(String name) {
-        this.dataImmigrantName = name;
-    }
-
-    public String getDataName() {
-        return dataImmigrantName;
-    }
-
-    public void clear() {
 
     }
 }

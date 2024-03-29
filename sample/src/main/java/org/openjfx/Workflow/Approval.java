@@ -1,12 +1,10 @@
 package org.openjfx.Workflow;
 
-import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
-import org.openjfx.Business.Immigrant;
 
-import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.*;
 
@@ -26,18 +24,14 @@ public class Approval {
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         this.approvalForm = form;
         this.approvalWorkflow = system;
+
         Button b = new Button();
         b.setText("Hello Do you Want Approval");
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         approvalScene = new Scene(layout, 960, 540);
+        primaryStage.setScene(approvalScene);
         approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                tempclear();
-            }
-        });
 
     }
 
@@ -112,7 +106,4 @@ public class Approval {
         return approvalWorkflow;
     }
 
-    public void tempclear() {
-        database.clear();
-    }
 }
