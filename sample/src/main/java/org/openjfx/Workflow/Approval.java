@@ -32,7 +32,7 @@ public class Approval {
 
     // Application Scene update
     public Scene approvalScene;
-    
+
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         this.approvalForm = form;
         this.approvalWorkflow = system;
@@ -195,10 +195,10 @@ public class Approval {
 
         // Scene set to application window
         approvalScene = new Scene(approvalGridPane, 1920, 1080);
+        approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(approvalScene);
         primaryStage.setMaximized(true);
-        approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
-        
+
     }
 
     public Approval(String dataBase, Form form) {
