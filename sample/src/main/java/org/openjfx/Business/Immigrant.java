@@ -4,7 +4,6 @@ public class Immigrant extends Person {
     private int ImmigrantPid;
     private int DependentPid; //references the dependent to claim
 
-    
     public Dependent getDependent() {
         return new Dependent();
     }
@@ -42,15 +41,15 @@ public class Immigrant extends Person {
         this.age = age;
     }
 
-    public void setbirthMonth(int birthMonth) {
+    public void setBirthMonth(int birthMonth) {
         this.birthMonth = birthMonth;
     }
 
-    public void setbirthDay(int birthDay) {
+    public void setBirthDay(int birthDay) {
         this.birthDay = birthDay;
     }
 
-    public void setbirthYear(int birthYear) {
+    public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
     }
 

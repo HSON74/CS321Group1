@@ -1,7 +1,5 @@
 package org.openjfx.Workflow;
 
-import org.openjfx.Business.*;
-
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -12,8 +10,6 @@ import javafx.stage.*;
 
 public class Window extends Application {
     private Workflow WindowWorkflow;
-
-    public Form applicationform;
 
     public static void main(String args[]) {
 
@@ -28,12 +24,10 @@ public class Window extends Application {
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         Scene scene = new Scene(layout, 960, 540);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(scene);
         b.setOnAction(e -> {
             WindowWorkflow = new Workflow();
-            applicationform = WindowWorkflow.generateForm();
-            WindowWorkflow.getDataEntry().dataEntryScene(applicationform,
+            WindowWorkflow.getDataEntry().dataEntryScene(WindowWorkflow.getDataEntry().systemForm,
                     WindowWorkflow,
                     primaryStage);
             primaryStage.setScene(WindowWorkflow.getDataEntry().dataEntryScene);

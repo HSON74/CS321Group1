@@ -4,7 +4,9 @@ public class Dependent extends Immigrant {
     private boolean prevClaim;
     private int dependentPid;
 
-    
+    public Dependent() {
+
+    }
 
     /*
      * Setter and Getter for Immigrant class that
@@ -15,22 +17,22 @@ public class Dependent extends Immigrant {
         this.prevClaim = prevClaim;
     }
 
-    @Override
+    public void setDependentPid(int pid) {
+        this.dependentPid = pid;
+    }
+
     public void setemploymentStatus(boolean employmentStatus){
         this.employmentStatus = employmentStatus;
     }
     
-    @Override
     public int getDependentPid() {
         return dependentPid;
     }
 
-    
     public boolean getPrevClaim(){
         return prevClaim;
     }
 
-    @Override
     public boolean getemploymentStatus(){
         return employmentStatus;
     }

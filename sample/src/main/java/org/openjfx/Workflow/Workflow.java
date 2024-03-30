@@ -21,7 +21,8 @@ public class Workflow {
     protected Approval workflowApproval;
     protected DataEntry workflowDataEntry;
     protected Database workflowDatabase;
-    protected static List<Scene> sceneArray;
+    protected List<Scene> sceneArray;
+    protected List<Integer> wfItems;
 
     // This is the workflow constructor if there's already a form
     public Workflow(Form form) {
@@ -38,20 +39,20 @@ public class Workflow {
         workflowApproval = new Approval(null, workflowDataEntry.systemForm);
     }
 
-    public static void initSceneArray(Scene titleScene) {
+    public void initSceneArray(Scene titleScene) {
         sceneArray = new ArrayList<>();
         sceneArray.add(titleScene);
     }
     
-    public static Scene getScene(int index) {
+    public Scene getScene(int index) {
         return sceneArray.get(index);
     }
 
-    public static void addScene(Scene scene) {
+    public void addScene(Scene scene) {
         sceneArray.add(scene);
     }
 
-    public static void removeScene(Scene scene) {
+    public void removeScene(Scene scene) {
         sceneArray.remove(scene);
     }
 
@@ -80,12 +81,13 @@ public class Workflow {
     }
 
     public boolean submit(Form form) {
-        workflowReview.Revalidate(form);
+        workflowReview.revalidate(form);
         return true;
     }
 
-    public boolean getCheck(Form form) {
-        return true;
+    public boolean getCheck(String string) {
+        if (string.equals("Success")) return true;
+        else return false;
     }
 
     public Form generateForm() {
