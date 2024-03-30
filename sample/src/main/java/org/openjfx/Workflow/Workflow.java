@@ -3,7 +3,7 @@ package org.openjfx.Workflow;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openjfx.Business.Dependent;
+import org.openjfx.Business.*;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
 
@@ -31,7 +31,8 @@ public class Workflow {
         workflowApproval = new Approval(null, form);
     }
 
-    // This constructor is for when a new form is being created at the start of the class
+    // This constructor is for when a new form is being created at the start of the
+    // class
     public Workflow() {
         workflowDataEntry = new DataEntry(this);
         workflowDataEntry.startProcess();
@@ -43,7 +44,7 @@ public class Workflow {
         sceneArray = new ArrayList<>();
         sceneArray.add(titleScene);
     }
-    
+
     public Scene getScene(int index) {
         return sceneArray.get(index);
     }
@@ -58,11 +59,10 @@ public class Workflow {
 
     // This method is for when a new workflow item is being added
     public Boolean addWFItem(String step, Integer onjid) {
-        if ((!step.equals(getStep()))&&(!objid.equals(getObjid()))) {
+        if ((!step.equals(getStep())) && (!objid.equals(getObjid()))) {
             setStep(step);
             setObjid(onjid);
-        }
-        else {
+        } else {
             return false;
         }
         return true;
@@ -86,8 +86,10 @@ public class Workflow {
     }
 
     public boolean getCheck(String string) {
-        if (string.equals("Success")) return true;
-        else return false;
+        if (string.equals("Success"))
+            return true;
+        else
+            return false;
     }
 
     public Form generateForm() {

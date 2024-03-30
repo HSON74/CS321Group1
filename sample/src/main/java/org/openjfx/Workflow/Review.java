@@ -36,10 +36,12 @@ public class Review {
             window.setTitle("Error Message:");
             window.setMinWidth(250);
             Label label = new Label();
-            if (file.getFormStatus() == FormStatus.EMPTY) label.setText("Error! Form is empty!");
-            else if (file.getFormStatus() != FormStatus.INPROGRESS) label.setText("Error! Some fields have not been fully filled out!");
+            if (file.getFormStatus() == FormStatus.EMPTY)
+                label.setText("Error! Form is empty!");
+            else if (file.getFormStatus() != FormStatus.INPROGRESS)
+                label.setText("Error! Some fields have not been fully filled out!");
             Button button = new Button("OK");
-            button.setOnAction(e->window.close());
+            button.setOnAction(e -> window.close());
             VBox layout = new VBox(10);
             layout.getChildren().addAll(label, button);
             layout.setAlignment(Pos.CENTER);
@@ -48,8 +50,7 @@ public class Review {
             window.setScene(scene);
             window.show();
             reviewWorkflow.returnForm();
-        }
-        else {
+        } else {
             reviewdata(file);
         }
     }
@@ -67,14 +68,18 @@ public class Review {
         // Immigrant Name
         String name = "Name :";
         Label immiName = new Label();
-        if (immigrant.getMiddleName() == null) immiName.setText(name + immigrant.getFirstName() + " " + immigrant.getLastName());
-        else immiName.setText(name + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
+        if (immigrant.getMiddleName() == null)
+            immiName.setText(name + immigrant.getFirstName() + " " + immigrant.getLastName());
+        else
+            immiName.setText(
+                    name + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
         // Immigrant Age
         Label immiAge = new Label();
         immiAge.setText("Age: " + immigrant.getAge());
         // Immigrant Birthday
         Label immiBirth = new Label();
-        immiBirth.setText("Birthday: " + immigrant.getbirthMonth() + "/" + immigrant.getbirthDay() + "/" + immigrant.getbirthYear());
+        immiBirth.setText("Birthday: " + immigrant.getbirthMonth() + "/" + immigrant.getbirthDay() + "/"
+                + immigrant.getbirthYear());
         // Immigrant Address
         Label immiAddress = new Label();
         immiAddress.setText("Address: " + immigrant.getAddress());
@@ -107,14 +112,18 @@ public class Review {
         dep.setText("Dependent Form");
         // Dependent Name
         Label depName = new Label();
-        if (dependent.getMiddleName() == null) depName.setText(name + dependent.getFirstName() + " " + dependent.getLastName());
-        else depName.setText(name + dependent.getFirstName() + " " + dependent.getMiddleName() + " " + dependent.getLastName());
+        if (dependent.getMiddleName() == null)
+            depName.setText(name + dependent.getFirstName() + " " + dependent.getLastName());
+        else
+            depName.setText(
+                    name + dependent.getFirstName() + " " + dependent.getMiddleName() + " " + dependent.getLastName());
         // Immigrant Age
         Label depAge = new Label();
         depAge.setText("Age: " + dependent.getAge());
         // Immigrant Birthday
         Label depBirth = new Label();
-        depBirth.setText("Birthday: " + dependent.getbirthMonth() + "/" + dependent.getbirthDay() + "/" + dependent.getbirthYear());
+        depBirth.setText("Birthday: " + dependent.getbirthMonth() + "/" + dependent.getbirthDay() + "/"
+                + dependent.getbirthYear());
         // Immigrant Address
         Label depAddress = new Label();
         depAddress.setText("Address: " + dependent.getAddress());
@@ -143,13 +152,14 @@ public class Review {
         Label depJob = new Label();
         depJob.setText("Occupation: " + dependent.getemploymentStatus());
         stack.getChildren().addAll(immi, immiName, immiAge, immiBirth, immiPhone, immiAddress,
-        immiSS, immiRace, immiGender, immiMarriage, immiFather, immiMother, immiJob,
-        dep, depName, depAge, depBirth, depPhone, depAddress, depSS, depRace, depGender, 
-        depMarriage, depFather, depMother, depJob);
+                immiSS, immiRace, immiGender, immiMarriage, immiFather, immiMother, immiJob,
+                dep, depName, depAge, depBirth, depPhone, depAddress, depSS, depRace, depGender,
+                depMarriage, depFather, depMother, depJob);
         Scene scene = new Scene(stack);
         setScene(scene);
         reviewWorkflow.addScene(scene);
     }
+
     /*
      * Setter and Getter for Review class.
      */

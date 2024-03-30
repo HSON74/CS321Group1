@@ -2,7 +2,7 @@ package org.openjfx.Business;
 
 public class Immigrant extends Person {
     private int ImmigrantPid;
-    private int DependentPid; //references the dependent to claim
+    private int DependentPid; // references the dependent to claim
 
     public Dependent getDependent() {
         return new Dependent();
@@ -19,7 +19,6 @@ public class Immigrant extends Person {
     public boolean removeDependent(Dependent dependent) {
         return true;
     }
-
 
     /*
      * Setter and Getter Methods for the Immigrant class
@@ -61,7 +60,7 @@ public class Immigrant extends Person {
         this.ImmigrantPid = pid;
     }
 
-    public void setDependentPid(int dependentPid){
+    public void setDependentPid(int dependentPid) {
         this.DependentPid = dependentPid;
     }
 
@@ -89,7 +88,7 @@ public class Immigrant extends Person {
         this.motherName = motherName;
     }
 
-    public void setAddress(String address){
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -97,17 +96,17 @@ public class Immigrant extends Person {
         this.employmentStatus = employmentStatus;
     }
 
-    //..............getter methods................
+    // ..............getter methods................
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getMiddleName(){
+    public String getMiddleName() {
         return middleName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
@@ -115,19 +114,19 @@ public class Immigrant extends Person {
         return age;
     }
 
-    public int getbirthMonth(){
+    public int getbirthMonth() {
         return birthMonth;
     }
-    
-    public int getbirthDay(){
+
+    public int getbirthDay() {
         return birthDay;
     }
 
-    public int getbirthYear(){
+    public int getbirthYear() {
         return birthYear;
     }
 
-    public int getSSNumber(){
+    public int getSSNumber() {
         return ssnumber;
     }
 
@@ -135,35 +134,35 @@ public class Immigrant extends Person {
         return ImmigrantPid;
     }
 
-    public int getDependentPid(){
+    public int getDependentPid() {
         return DependentPid;
     }
 
-    public String getRace(){
+    public String getRace() {
         return race;
     }
 
-    public String getGender(){
+    public String getGender() {
         return gender;
     }
-    
-    public boolean getMarriedStatus(){
+
+    public boolean getMarriedStatus() {
         return married;
     }
 
-    public String getPhoneNumber(){
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getFatherName(){
+    public String getFatherName() {
         return fatherName;
     }
 
-    public String getMotherName(){
+    public String getMotherName() {
         return motherName;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return address;
     }
 

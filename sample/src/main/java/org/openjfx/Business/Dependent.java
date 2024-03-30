@@ -21,20 +21,20 @@ public class Dependent extends Immigrant {
         this.dependentPid = pid;
     }
 
-    public void setemploymentStatus(boolean employmentStatus){
+    public void setemploymentStatus(boolean employmentStatus) {
         this.employmentStatus = employmentStatus;
     }
-    
+
     public int getDependentPid() {
         return dependentPid;
     }
 
-    public boolean getPrevClaim(){
+    public boolean getPrevClaim() {
         return prevClaim;
     }
 
-    public boolean getemploymentStatus(){
+    public boolean getemploymentStatus() {
         return employmentStatus;
     }
-    
+
 }
