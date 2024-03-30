@@ -31,37 +31,66 @@ public class Approval {
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         this.approvalForm = form;
         this.approvalWorkflow = system;
-        Text[] approvalTextsI = { new Text("First Name: "), new Text("Middle Name:"), new Text("Last Name:"),
-                new Text("Age: "), new Text("Birth Month:"), new Text("Birth Day:"), new Text("Birth Year: "),
-                new Text("Address: "), new Text("Social Secrutiy Numbers:"), new Text("Race: "), new Text("Gender: "),
-                new Text("Married Status: "), new Text("Phone Numbers: "), new Text("Mother Name: "),
-                new Text("Father Name: "), new Text("Employment Status: "), new Text("Immigrant PID: "),
-                new Text("Immirgrant's Dependent PID: "), };
-        Text[] approvalTextsD = { new Text("First Name: "), new Text("Middle Name:"), new Text("Last Name:"),
-                new Text("Age: "), new Text("Birth Month:"), new Text("Birth Day:"), new Text("Birth Year: "),
-                new Text("Address: "), new Text("Social Secrutiy Numbers:"), new Text("Race: "), new Text("Gender: "),
-                new Text("Married Status: "), new Text("Phone Numbers: "), new Text("Mother Name: "),
-                new Text("Father Name: "), new Text("Employment Status: "), new Text("Immigrant PID: "),
-                new Text("Immirgrant's Dependent PID: "), };
-        Text stringForm = new Text("Resigter for Dependent for Immigrant");
-        Text stringImmigrant = new Text("Immigrant Resigter");
-        stringForm.setFont(Font.font("seirf", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        // checkFrom();
+        // approvalWorkflow.addScene(approvalScene);
+        // Text[] approvalTextsI = { new Text("First Name: "), new Text("Middle Name:"),
+        // new Text("Last Name:"),
+        // new Text("Age: "), new Text("Birth Month:"), new Text("Birth Day:"), new
+        // Text("Birth Year: "),
+        // new Text("Address: "), new Text("Social Secrutiy Numbers:"), new Text("Race:
+        // "), new Text("Gender: "),
+        // new Text("Married Status: "), new Text("Phone Numbers: "), new Text("Mother
+        // Name: "),
+        // new Text("Father Name: "), new Text("Employment Status: "), new
+        // Text("Immigrant PID: "),
+        // new Text("Immirgrant's Dependent PID: ") };
+        // Text[] approvalTextsD = { new Text("First Name: "), new Text("Middle Name:"),
+        // new Text("Last Name:"),
+        // new Text("Age: "), new Text("Birth Month:"), new Text("Birth Day:"), new
+        // Text("Birth Year: "),
+        // new Text("Address: "), new Text("Social Secrutiy Numbers:"), new Text("Race:
+        // "), new Text("Gender: "),
+        // new Text("Married Status: "), new Text("Phone Numbers: "), new Text("Mother
+        // Name: "),
+        // new Text("Father Name: "), new Text("Employment Status: "), new
+        // Text("Immigrant PID: "),
+        // new Text("Immirgrant's Dependent PID: "), };
+        // Text stringForm = new Text("Resigter for Dependent for Immigrant");
+        // Text stringFormDescription = new Text(
+        // "The form is currently in the approval.\n Make sure to all field are fill
+        // before sumbmision\n"
+        // + "We will check and get you a Dependent if the Dependent is field is not
+        // add.\n"
+        // + "we wil not Dependent is not \n"
+        // + "If you are a Dependent with Immigrant not fill out.\n"
+        // + "We wil add to you to the system and assign an immirgrant when
+        // avaiable\n");
+        // Text stringImmigrant = new Text("Immigrant Resigter:");
+        // Text stringDependent = new Text("Dependent Resigter:");
+        // stringForm.setFont(Font.font("seirf", FontWeight.BOLD, FontPosture.REGULAR,
+        // 50));
+        // stringImmigrant.setFont(Font.font("seirf", FontWeight.BOLD,
+        // FontPosture.REGULAR, 25));
+        // stringDependent.setFont(Font.font("seirf", FontWeight.BOLD,
+        // FontPosture.REGULAR, 25));
         GridPane approvalGridPane = new GridPane();
         approvalGridPane.setHgap(10);
         approvalGridPane.setVgap(10);
         approvalGridPane.setMaxSize(1920, 1080);
         Button b = new Button();
         b.setText("Hello Do you Want Approval");
-        approvalGridPane.add(stringImmigrant, 1, 0);
-        for (int i = 0; i < approvalTextsI.length; i++) {
-            int column = i + 1;
-            approvalGridPane.add(approvalTextsI[i], 1, column);
+        // approvalGridPane.add(stringForm, 0, 0);
+        // approvalGridPane.add(stringFormDescription, 1, 1);
+        // approvalGridPane.add(stringImmigrant, 0, 2);
+        // approvalGridPane.add(stringDependent, 50, 2);
+        // for (int i = 0; i < approvalTextsI.length; i++) {
+        // approvalGridPane.add(approvalTextsI[i], 0, i + 5);
 
-        }
-        for (int i = 0; i < approvalTextsD.length; i++) {
-            int column = i + 1;
-            approvalGridPane.add(approvalTextsD[i], 50, column);
-        }
+        // }
+        // for (int i = 0; i < approvalTextsD.length; i++) {
+        // approvalGridPane.add(approvalTextsD[i], 50, i + 5);
+        // }
+
         approvalScene = new Scene(approvalGridPane, 1920, 1080);
         primaryStage.setScene(approvalScene);
         approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
@@ -77,10 +106,6 @@ public class Approval {
     }
 
     public boolean checkFrom() {
-        if (approvalForm != null) {
-            System.err.println("The immigrant or dependent form ");
-            return false;
-        }
         if (approvalForm != null) {
             System.err.println("The immigrant or dependent form ");
             return false;
