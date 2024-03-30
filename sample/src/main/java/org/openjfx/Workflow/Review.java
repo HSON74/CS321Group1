@@ -23,6 +23,7 @@ public class Review {
         StackPane layout = new StackPane();
         layout.getChildren().add(b);
         rScene = new Scene(layout, 960, 540);
+        rScene.getRoot().setStyle("-fx-font-family: 'serif'");
         b.setOnAction(e -> {
             reviewWorkflow.getApproval().Adisplay(form, reviewWorkflow, primaryStage);
             primaryStage.setScene(reviewWorkflow.getApproval().approvalScene);
@@ -46,6 +47,7 @@ public class Review {
             layout.getChildren().addAll(label, button);
             layout.setAlignment(Pos.CENTER);
             Scene scene = new Scene(layout);
+            scene.getRoot().setStyle("-fx-font-family: 'serif'");
             reviewWorkflow.addScene(scene);
             window.setScene(scene);
             window.show();
@@ -156,6 +158,7 @@ public class Review {
                 dep, depName, depAge, depBirth, depPhone, depAddress, depSS, depRace, depGender,
                 depMarriage, depFather, depMother, depJob);
         Scene scene = new Scene(stack);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
         setScene(scene);
         reviewWorkflow.addScene(scene);
     }
