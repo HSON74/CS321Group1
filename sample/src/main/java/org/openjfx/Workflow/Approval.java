@@ -34,6 +34,9 @@ public class Approval {
     public Scene approvalScene;
 
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
+        if (form == null) {
+            System.out.println("Null form");
+        }
         this.approvalForm = form;
         this.approvalWorkflow = system;
         Text[] approvalTextsI = { new Text("First Name: "), new Text("Middle Name:"),
@@ -72,42 +75,42 @@ public class Approval {
         if (checkFrom()) {
             System.out.println("Form exist");
             int i = 0;
-            formI[i++] = form.getImmigrant().getFirstName();
-            formI[i++] = form.getImmigrant().getMiddleName();
-            formI[i++] = form.getImmigrant().getLastName();
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getFirstName());
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getMiddleName());
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getLastName());
             formI[i++] = String.valueOf(form.getImmigrant().getAge());
-            formI[i++] = Helper.intToMonth(form.getImmigrant().getbirthMonth());
+            formI[i++] = Helper.nullStringCheck(Helper.intToMonth(form.getImmigrant().getbirthMonth()));
             formI[i++] = Helper.intToDay(form.getImmigrant().getbirthMonth(), form.getImmigrant().getbirthDay(),
                     form.getImmigrant().getbirthYear());
             formI[i++] = Helper.intToYear(form.getImmigrant().getbirthYear());
-            formI[i++] = form.getImmigrant().getAddress();
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getAddress());
             formI[i++] = String.valueOf(form.getImmigrant().getSSNumber());
-            formI[i++] = form.getImmigrant().getRace();
-            formI[i++] = form.getImmigrant().getGender();
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getRace());
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getGender());
             formI[i++] = Helper.BooleantoYN(form.getImmigrant().getMarriedStatus());
-            formI[i++] = form.getImmigrant().getPhoneNumber();
-            formI[i++] = form.getImmigrant().getFatherName();
-            formI[i++] = form.getImmigrant().getMotherName();
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getPhoneNumber());
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getFatherName());
+            formI[i++] = Helper.nullStringCheck(form.getImmigrant().getMotherName());
             formI[i++] = Helper.BooleantoYN(form.getImmigrant().getemploymentStatus());
             formI[i++] = String.valueOf(form.getImmigrant().getImmigrantPid());
             formI[i++] = String.valueOf(form.getImmigrant().getDependentPid());
             i = 0;
-            formD[i++] = form.getDependent().getFirstName();
-            formD[i++] = form.getDependent().getMiddleName();
-            formD[i++] = form.getDependent().getLastName();
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getFirstName());
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getMiddleName());
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getLastName());
             formD[i++] = String.valueOf(form.getDependent().getAge());
-            formD[i++] = Helper.intToMonth(form.getDependent().getbirthMonth());
+            formD[i++] = Helper.nullStringCheck(Helper.intToMonth(form.getDependent().getbirthMonth()));
             formD[i++] = Helper.intToDay(form.getDependent().getbirthMonth(), form.getDependent().getbirthDay(),
                     form.getDependent().getbirthYear());
             formD[i++] = Helper.intToYear(form.getDependent().getbirthYear());
-            formD[i++] = form.getDependent().getAddress();
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getAddress());
             formD[i++] = String.valueOf(form.getDependent().getSSNumber());
-            formD[i++] = form.getDependent().getRace();
-            formD[i++] = form.getDependent().getGender();
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getRace());
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getGender());
             formD[i++] = Helper.BooleantoYN(form.getDependent().getMarriedStatus());
-            formD[i++] = form.getDependent().getPhoneNumber();
-            formD[i++] = form.getDependent().getFatherName();
-            formD[i++] = form.getDependent().getMotherName();
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getPhoneNumber());
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getFatherName());
+            formD[i++] = Helper.nullStringCheck(form.getDependent().getMotherName());
             formD[i++] = Helper.BooleantoYN(form.getDependent().getemploymentStatus());
             formD[i++] = Helper.BooleantoYN(form.getDependent().getPrevClaim());
             formD[i++] = String.valueOf(form.getDependent().getDependentPid());
@@ -210,21 +213,21 @@ public class Approval {
     }
 
     public boolean checkFrom() {
-        if (approvalForm != null) {
+        if (approvalForm == null) {
+            System.err.println("The form is null");
+            return false;
+        }
+        if (approvalForm.getImmigrant() == null && approvalForm.getDependent() == null) {
             System.err.println("The immigrant or dependent form ");
             return false;
         }
-        if (approvalForm != null) {
-            System.err.println("The immigrant or dependent form ");
-            return false;
-        }
-        int iPid = approvalForm.getImmigrant().getImmigrantPid();
-        int dPid = approvalForm.getDependent().getDependentPid();
-        boolean isSystem = database.checkData(iPid, dPid);
-        if (isSystem) {
-            setApprovalStatus(ApprovalStatus.NEEDREVIEW);
-            return false;
-        }
+        // int iPid = approvalForm.getImmigrant().getImmigrantPid();
+        // int dPid = approvalForm.getDependent().getDependentPid();
+        // boolean isSystem = database.checkData(iPid, dPid);
+        // if (isSystem) {
+        // setApprovalStatus(ApprovalStatus.NEEDREVIEW);
+        // return false;
+        // }
         return true;
     }
 

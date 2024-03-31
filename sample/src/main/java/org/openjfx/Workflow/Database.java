@@ -55,12 +55,11 @@ public class Database {
             while (scr.hasNextLine()) {
                 // Form tempForm = new Form();
                 String mystring = scr.nextLine();
-                /*
-                 * Immigrant tempImmigrantForm = new Immigrant();
-                 * // Dependent tempDependentForm = new Dependent();
-                 * // int i = 0;
-                 * // String StringArray[] = mystring.split("/", 0);
-                 */
+
+                Immigrant tempImmigrantForm = new Immigrant();
+                Dependent tempDependentForm = new Dependent();
+                int i = 0;
+                String StringArray[] = mystring.split("/", 0);
 
             }
             scr.close();

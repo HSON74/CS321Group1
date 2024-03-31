@@ -28,7 +28,7 @@ public class Helper {
             case 12:
                 return "December";
             default:
-                return "null";
+                return null;
         }
     }
 
@@ -173,6 +173,14 @@ public class Helper {
             return "False";
         } else {
             return null;
+        }
+    }
+
+    public static String nullStringCheck(String myString) {
+        if (myString == null) {
+            return "N/A";
+        } else {
+            return myString;
         }
     }
 }
