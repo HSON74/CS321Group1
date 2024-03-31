@@ -8,6 +8,7 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.*;
 import javafx.geometry.*;
 
 public class Review {
@@ -18,16 +19,9 @@ public class Review {
     public void rDisplay(Form form, Workflow system, Stage primaryStage) {
         this.reviewForm = form;
         this.reviewWorkflow = system;
-        Button b = new Button();
-        b.setText("Review Form");
-        StackPane layout = new StackPane();
-        layout.getChildren().add(b);
-        rScene = new Scene(layout, 960, 540);
+        reviewdata(form);
         rScene.getRoot().setStyle("-fx-font-family: 'serif'");
-        b.setOnAction(e -> {
-            reviewWorkflow.getApproval().Adisplay(form, reviewWorkflow, primaryStage);
-            primaryStage.setScene(reviewWorkflow.getApproval().approvalScene);
-        });
+        primaryStage.setScene(rScene);
     }
 
     public void revalidate(Form file) {
@@ -35,12 +29,18 @@ public class Review {
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
             window.setTitle("Error Message:");
-            window.setMinWidth(250);
             Label label = new Label();
-            if (file.getFormStatus() == FormStatus.EMPTY)
+            label.setFont(Font.font("seirf", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+            if (file.getFormStatus() == FormStatus.EMPTY) {
                 label.setText("Error! Form is empty!");
-            else if (file.getFormStatus() != FormStatus.INPROGRESS)
+                window.setMinWidth(250);
+                window.setMinHeight(200);
+            }
+            else if (file.getFormStatus() == FormStatus.INPROGRESS) {
                 label.setText("Error! Some fields have not been fully filled out!");
+                window.setMinWidth(400);
+                window.setMinHeight(200);
+            } 
             Button button = new Button("OK");
             button.setOnAction(e -> window.close());
             VBox layout = new VBox(10);
@@ -51,117 +51,85 @@ public class Review {
             reviewWorkflow.addScene(scene);
             window.setScene(scene);
             window.show();
-            reviewWorkflow.returnForm();
+            button.setOnAction(e->{
+                reviewWorkflow.returnForm(file);
+                window.close();
+            });
         } else {
-            reviewdata(file);
+            reviewWorkflow.submit(file);
         }
     }
 
     public void reviewdata(Form file) {
         Immigrant immigrant = file.getImmigrant();
         Dependent dependent = file.getDependent();
-        StackPane stack = new StackPane();
-        // Title
-        Label title = new Label();
-        title.setText("Review");
-        // Immigrant Label
-        Label immi = new Label();
-        immi.setText("Immigrant Form");
-        // Immigrant Name
-        String name = "Name :";
-        Label immiName = new Label();
-        if (immigrant.getMiddleName() == null) {
-            immiName.setText(name + immigrant.getFirstName() + " " + immigrant.getLastName());
-        }
-        else {
-            immiName.setText(name + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
-        }
-        // Immigrant Age
-        Label immiAge = new Label();
-        immiAge.setText("Age: " + immigrant.getAge());
-        // Immigrant Birthday
-        Label immiBirth = new Label();
-        immiBirth.setText("Birthday: " + immigrant.getbirthMonth() + "/" + immigrant.getbirthDay() + "/" + immigrant.getbirthYear());
-        // Immigrant Address
-        Label immiAddress = new Label();
-        immiAddress.setText("Address: " + immigrant.getAddress());
-        // Immigrant SS Number
-        Label immiSS = new Label();
-        immiSS.setText("Social Security Number: " + immigrant.getSSNumber());
-        // Immigrant Race
-        Label immiRace = new Label();
-        immiRace.setText("Race: " + immigrant.getRace());
-        // Immigrant Gender
-        Label immiGender = new Label();
-        immiGender.setText("Gender: " + immigrant.getGender());
-        // Immigrant Marriage
-        Label immiMarriage = new Label();
-        immiMarriage.setText("Marriage Status: " + immigrant.getMarriedStatus());
-        // Immigrant Phone Number
-        Label immiPhone = new Label();
-        immiPhone.setText("Phone Number: " + immigrant.getPhoneNumber());
-        // Immigrant's Father
-        Label immiFather = new Label();
-        immiFather.setText("Father: " + immigrant.getFatherName());
-        // Immigrant's Mother
-        Label immiMother = new Label();
-        immiMother.setText("Mother: " + immigrant.getMotherName());
-        // Immigrant's Employment Status
-        Label immiJob = new Label();
-        immiJob.setText("Occupation: " + immigrant.getemploymentStatus());
-        // Dependent Label
-        Label dep = new Label();
-        dep.setText("Dependent Form");
+        GridPane grid = new GridPane();
+        Text title = new Text("Form Review");
+        title.setFont(Font.font("seirf", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        Text description = new Text("Please Review the Form Data of Immigrant and Dependent Before Revalidation");
+        description.setFont(Font.font("seirf", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+        Text immiName = new Text();
+        if (immigrant.getMiddleName() == null) immiName.setText("Name: " + immigrant.getFirstName() + " " + immigrant.getLastName());
+        else immiName.setText("Name: " + immigrant.getFirstName() + " " + immigrant.getMiddleName() + " " + immigrant.getLastName());
+        Text[] immigrantTexts = {
+            new Text("Immigrant Form"),
+            immiName, 
+            new Text("Age: " + immigrant.getAge()), 
+            new Text("Birthday: " + immigrant.getbirthMonth() + "/" + immigrant.getbirthDay() + "/" + immigrant.getbirthYear()),
+            new Text("Address: " + immigrant.getAddress()),
+            new Text("Social Security Number: " + immigrant.getSSNumber()), 
+            new Text("Race: " + immigrant.getRace()), 
+            new Text("Gender: " + immigrant.getGender()), 
+            new Text("Marriage Status: " + immigrant.getMarriedStatus()),
+            new Text("Phone Number: " + immigrant.getPhoneNumber()), 
+            new Text("Father: " + immigrant.getFatherName()), 
+            new Text("Mother: " + immigrant.getMotherName()),
+            new Text("Occupation: " + immigrant.getemploymentStatus())
+        };
         // Dependent Name
-        Label depName = new Label();
-        if (dependent.getMiddleName() == null) {
-            depName.setText(name + dependent.getFirstName() + " " + dependent.getLastName());
+        Text depName = new Text();
+        if (dependent.getMiddleName() == null) depName.setText("Name: " + dependent.getFirstName() + " " + dependent.getLastName());
+        else depName.setText("Name: " + dependent.getFirstName() + " " + dependent.getMiddleName() + " " + dependent.getLastName());
+        Text[] dependentTexts = {
+            new Text("Dependent Form"),
+            depName, 
+            new Text("Age: " + dependent.getAge()), 
+            new Text("Birthday: " + dependent.getbirthMonth() + "/" + dependent.getbirthDay() + "/" + dependent.getbirthYear()),
+            new Text("Address: " + dependent.getAddress()),
+            new Text("Social Security Number: " + dependent.getSSNumber()), 
+            new Text("Race: " + dependent.getRace()), 
+            new Text("Gender: " + dependent.getGender()), 
+            new Text("Marriage Status: " + dependent.getMarriedStatus()),
+            new Text("Phone Number: " + dependent.getPhoneNumber()), 
+            new Text("Father: " + dependent.getFatherName()), 
+            new Text("Mother: " + dependent.getMotherName()),
+            new Text("Occupation: " + dependent.getemploymentStatus())
+        };
+        Text conf = new Text("Press Submit to submit the form if everything is correct");
+        conf.setFont(Font.font("seirf", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setMinSize(960, 540);
+        grid.setMaxSize(1920, 1080);
+        grid.add(title, 0, 0);
+        grid.add(description, 0, 1);
+        immigrantTexts[0].setFont(Font.font("seirf", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        grid.add(immigrantTexts[0], 0, 2);
+        dependentTexts[0].setFont(Font.font("seirf", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        grid.add(dependentTexts[0], 1, 2);
+        for (int i = 1; i < immigrantTexts.length; i++) {
+            immigrantTexts[i].setFont(Font.font("seirf", FontWeight.NORMAL, FontPosture.REGULAR, 10));
+            grid.add(immigrantTexts[i],0,i+2);
+            dependentTexts[i].setFont(Font.font("seirf", FontWeight.NORMAL, FontPosture.REGULAR, 10));
+            grid.add(dependentTexts[i],1,i+2);
         }
-        else {
-            depName.setText(name + dependent.getFirstName() + " " + dependent.getMiddleName() + " " + dependent.getLastName());
-        }
-        // Immigrant Age
-        Label depAge = new Label();
-        depAge.setText("Age: " + dependent.getAge());
-        // Immigrant Birthday
-        Label depBirth = new Label();
-        depBirth.setText("Birthday: " + dependent.getbirthMonth() + "/" + dependent.getbirthDay() + "/" + dependent.getbirthYear());
-        // Immigrant Address
-        Label depAddress = new Label();
-        depAddress.setText("Address: " + dependent.getAddress());
-        // Immigrant SS Number
-        Label depSS = new Label();
-        depSS.setText("Social Security Number: " + dependent.getSSNumber());
-        // Immigrant Race
-        Label depRace = new Label();
-        depRace.setText("Race: " + dependent.getRace());
-        // Immigrant Gender
-        Label depGender = new Label();
-        depGender.setText("Gender: " + dependent.getGender());
-        // Immigrant Marriage
-        Label depMarriage = new Label();
-        depMarriage.setText("Marriage Status: " + dependent.getMarriedStatus());
-        // Immigrant Phone Number
-        Label depPhone = new Label();
-        depPhone.setText("Phone Number: " + dependent.getPhoneNumber());
-        // Immigrant's Father
-        Label depFather = new Label();
-        depFather.setText("Father: " + dependent.getFatherName());
-        // Immigrant's Mother
-        Label depMother = new Label();
-        depMother.setText("Mother: " + dependent.getMotherName());
-        // Dependent's Employment Status
-        Label depJob = new Label();
-        depJob.setText("Occupation: " + dependent.getemploymentStatus());
-        Label conf = new Label();
-        conf.setText("Press Submit to submit the form if everything is correct");
-        stack.getChildren().addAll(immi, immiName, immiAge, immiBirth, immiPhone, immiAddress,
-                immiSS, immiRace, immiGender, immiMarriage, immiFather, immiMother, immiJob,
-                dep, depName, depAge, depBirth, depPhone, depAddress, depSS, depRace, depGender,
-                depMarriage, depFather, depMother, depJob);
+        grid.add(conf, 0, 15);
         Button button = new Button("OK");
-        button.setOnAction(e -> reviewWorkflow.submit(file));
-        Scene scene = new Scene(stack);
+        button.setOnAction(e -> revalidate(file));
+        grid.add(button, 0, 17);
+        Scene scene = new Scene(grid, 960,540);
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
         setScene(scene);
         reviewWorkflow.addScene(scene);

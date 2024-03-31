@@ -1,18 +1,17 @@
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import org.openjfx.Business.*;
 import org.openjfx.Workflow.*;
 
+
 public class ReviewTest {
-    Immigrant immigrant;
-    Dependent dependent;
-    Form form;
-    Review review;
+    Immigrant immigrant = new Immigrant();
+    Dependent dependent = new dependent();
+    Form form = new Form();
+    ReviewTest review;
 
     @BeforeAll
     public static void init() {
-        immigrant = new Immigrant();
         immigrant.setFirstName("John");
         immigrant.setMiddleName("Alex");
         immigrant.setLastName("Doe");
@@ -31,7 +30,6 @@ public class ReviewTest {
         immigrant.setMother("Katherine Doe");
         immigrant.setAddress("145 Callands Dr. Alexandria, Va");
         immigrant.setemploymentStatus(true);
-        dependent = new dependent();
         dependent.setFirstName("James");
         dependent.setMiddleName("William");
         dependent.setLastName("Doe");

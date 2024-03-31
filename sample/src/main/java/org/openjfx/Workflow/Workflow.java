@@ -83,12 +83,11 @@ public class Workflow {
         return count;
     }
 
-    public Form returnForm() {
-        return workflowApproval.getForm();
+    public Form returnForm(Form form) {
+        return form;
     }
 
     public boolean submit(Form form) {
-        workflowReview.revalidate(form);
         return true;
     }
 
