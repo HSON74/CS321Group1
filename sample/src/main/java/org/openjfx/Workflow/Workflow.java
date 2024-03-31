@@ -59,7 +59,8 @@ public class Workflow {
 
     // This method is for when a new workflow item is being added
     public Boolean addWFItem(String step, Integer onjid) {
-        if ((!step.equals(getStep())) && (!objid.equals(getObjid()))) {
+        if (!step.equals(getStep())) {
+            wfItems.add(onjid);
             setStep(step);
             setObjid(onjid);
         } else {
@@ -73,7 +74,11 @@ public class Workflow {
     }
 
     public Integer countWFItems(String step) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < wfItems.size(); i++) {
+            count++;
+        }
+        return count;
     }
 
     public Form returnForm() {
