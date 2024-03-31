@@ -177,8 +177,24 @@ public class Helper {
     }
 
     public static String nullStringCheck(String myString) {
-        if (myString == null) {
+        if (myString == null || myString.equalsIgnoreCase("null") || myString.equalsIgnoreCase("N/A")) {
             return "N/A";
+        } else {
+            return myString;
+        }
+    }
+
+    public static String nullStringNullString(String myString) {
+        if (myString == null || myString.equalsIgnoreCase("null") || myString.equalsIgnoreCase("N/A")) {
+            return "null";
+        } else {
+            return myString;
+        }
+    }
+
+    public static String nullStringNull(String myString) {
+        if (myString == null || myString.equalsIgnoreCase("null") || myString.equalsIgnoreCase("N/A")) {
+            return null;
         } else {
             return myString;
         }

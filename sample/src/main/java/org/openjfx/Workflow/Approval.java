@@ -208,7 +208,7 @@ public class Approval {
 
         this.approvalForm = form;
         setApprovalStatus(ApprovalStatus.INPROGRESS);
-        setDatabase(dataBase);
+        setDatabase(dataBase, form);
 
     }
 
@@ -221,14 +221,14 @@ public class Approval {
             System.err.println("The immigrant or dependent form ");
             return false;
         }
-        // int iPid = approvalForm.getImmigrant().getImmigrantPid();
-        // int dPid = approvalForm.getDependent().getDependentPid();
-        // boolean isSystem = database.checkData(iPid, dPid);
-        // if (isSystem) {
-        // setApprovalStatus(ApprovalStatus.NEEDREVIEW);
-        // return false;
-        // }
-        return true;
+        int iPid = approvalForm.getImmigrant().getImmigrantPid();
+        int dPid = approvalForm.getDependent().getDependentPid();
+        boolean isSystem = database.checkData(iPid, dPid);
+        if (!isSystem) {
+            setApprovalStatus(ApprovalStatus.NEEDREVIEW);
+            return true;
+        }
+        return false;
     }
 
     public boolean connection() {
@@ -255,8 +255,8 @@ public class Approval {
         return approvalForm;
     }
 
-    protected void setDatabase(String dataBase) {
-        this.database = new Database(dataBase, null);
+    protected void setDatabase(String dataBase, Form form) {
+        this.database = new Database(form, dataBase, null);
     }
 
     protected Database getDatabase() {
