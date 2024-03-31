@@ -29,6 +29,7 @@ public class Workflow {
         workflowDataEntry = new DataEntry(this);
         workflowReview = new Review();
         workflowApproval = new Approval(null, form);
+        wfItems = new ArrayList<>();
     }
 
     // This constructor is for when a new form is being created at the start of the
@@ -38,6 +39,7 @@ public class Workflow {
         workflowDataEntry.startProcess();
         workflowReview = new Review();
         workflowApproval = new Approval(null, workflowDataEntry.systemForm);
+        wfItems = new ArrayList<>();
     }
 
     public void initSceneArray(Scene titleScene) {
@@ -82,7 +84,7 @@ public class Workflow {
     }
 
     public Form returnForm() {
-        return new Form();
+        return workflowApproval.getForm();
     }
 
     public boolean submit(Form form) {
@@ -90,19 +92,16 @@ public class Workflow {
         return true;
     }
 
-    public boolean getCheck(String string) {
-        if (string.equals("Success"))
-            return true;
-        else
-            return false;
-    }
+    /*public boolean getCheck(String string) {
+        return workflowApproval.checkForm
+    }*/
 
     public Form generateForm() {
         Form newForm = new Form();
         Immigrant newImmigrant = new Immigrant();
         Dependent newDependent = new Dependent();
-        newForm.setDependent(newDependent);
         newForm.setImmigrant(newImmigrant);
+        newForm.setDependent(newDependent);
         return newForm;
     }
 
