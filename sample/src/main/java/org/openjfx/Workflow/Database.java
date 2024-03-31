@@ -38,17 +38,21 @@ public class Database {
             databaseNameImmigrant = "Immigrant";
         }
         if (databaseNameDependent == null) {
-            databaseNameImmigrant = "Dependent";
+            databaseNameDependent = "Dependent";
         }
-        this.dataNameForImmigrant = "./sample/src/main/java/org/openjfx/Database/" + databaseNameImmigrant + ".txt";
-        this.dataNameForDependent = "./sample/src/main/java/org/openjfx/Database/" + databaseNameDependent + ".txt";
-
+        this.dataNameForImmigrant = System.getProperty("user.dir") + "/src/main/java/org/openjfx/Database/"
+                + databaseNameImmigrant
+                + ".txt";
+        this.dataNameForDependent = System.getProperty("user.dir") + "./src/main/java/org/openjfx/Database/"
+                + databaseNameDependent + ".txt";
+        System.out.println(dataNameForImmigrant);
         try {
             File datafile = new File(dataNameForImmigrant);
             Scanner scr;
             if (datafile.exists()) {
                 scr = new Scanner(datafile);
                 this.ImmigrantPIDGenerate = Integer.parseInt(scr.nextLine());
+                System.out.println(datafile.getAbsolutePath());
                 System.err.println("File Exist");
             } else {
                 datafile.createNewFile();
@@ -68,26 +72,28 @@ public class Database {
                 this.DatabaseFormsImmigrant.add(tempImmigrantForm);
             }
             scr.close();
-            if (datafile.exists()) {
-                scr = new Scanner(datafile);
-                this.DependentPIDGenerate = Integer.parseInt(scr.nextLine());
+            Scanner dscr;
+            File datafiled = new File(databaseNameDependent);
+            if (datafiled.exists()) {
+                dscr = new Scanner(datafiled);
+                System.out.println(datafiled.getAbsolutePath());
+                this.DependentPIDGenerate = Integer.parseInt(dscr.nextLine());
                 System.err.println("File Exist");
             } else {
-                datafile.createNewFile();
-                BufferedWriter writer = new BufferedWriter(new FileWriter(datafile));
+                datafiled.createNewFile();
+                BufferedWriter writer = new BufferedWriter(new FileWriter(datafiled));
                 writer.write("1");
-                scr = new Scanner(datafile);
+                dscr = new Scanner(datafiled);
                 System.err.println("File Exist not exist");
                 writer.close();
             }
-            datafile = new File(databaseNameDependent);
             this.DatabaseFormsDependent = new ArrayList<Dependent>();
-            while (scr.hasNextLine()) {
-                String mystring = scr.nextLine();
+            while (dscr.hasNextLine()) {
+                String mystring = dscr.nextLine();
                 Dependent tempDependentForm = setRecordtoDependent(mystring);
                 DatabaseFormsDependent.add(tempDependentForm);
             }
-            scr.close();
+            dscr.close();
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -112,6 +118,7 @@ public class Database {
             return false;
         }
         boolean addDatatoFile = saveData(form);
+        System.out.println("add to system");
         return addDatatoFile;
     }
 
@@ -164,6 +171,42 @@ public class Database {
             }
         }
         return null;
+    }
+
+    public Immigrant getDataImmigrantSSN(int sSNumber) {
+        if (DatabaseFormsImmigrant == null) {
+            return null;
+        }
+        for (int i = 0; i < DatabaseFormsImmigrant.size(); i++) {
+            if (DatabaseFormsImmigrant.get(i).getSSNumber() == sSNumber) {
+                return DatabaseFormsImmigrant.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Dependent getDataDependentSSN(int sSNumber) {
+        if (DatabaseFormsDependent == null) {
+            return null;
+        }
+        for (int i = 0; i < DatabaseFormsDependent.size(); i++) {
+            if (DatabaseFormsDependent.get(i).getSSNumber() == sSNumber) {
+                return DatabaseFormsDependent.get(i);
+            }
+        }
+        return null;
+    }
+
+    public int giveImmigrantPid() {
+        int oldNumber = ImmigrantPIDGenerate;
+        ImmigrantPIDGenerate++;
+        return oldNumber;
+    }
+
+    public int giveDependentPid() {
+        int oldNumber = DependentPIDGenerate;
+        DependentPIDGenerate++;
+        return oldNumber;
     }
 
     private boolean saveData(Form inputForm) {
@@ -228,7 +271,8 @@ public class Database {
         ArrayList<Immigrant> temp = new ArrayList<Immigrant>();
         Boolean result = false;
         for (int j = 0; j < DatabaseFormsImmigrant.size(); j++) {
-            if (DatabaseFormsImmigrant.get(j).getImmigrantPid() == immigrant.getImmigrantPid()) {
+            if (DatabaseFormsImmigrant.get(j).getImmigrantPid() == immigrant.getImmigrantPid()
+                    || immigrant.getSSNumber() == DatabaseFormsImmigrant.get(j).getSSNumber()) {
                 String newLine = setImmigranttoRecord(immigrant);
                 updateLine(newLine, dataNameForImmigrant, j + 1, "Update");
                 temp.add(immigrant);
@@ -248,7 +292,8 @@ public class Database {
         ArrayList<Dependent> temp = new ArrayList<Dependent>();
         Boolean result = false;
         for (int j = 0; j < DatabaseFormsDependent.size(); j++) {
-            if (DatabaseFormsDependent.get(j).getDependent().getDependentPid() == dependent.getDependentPid()) {
+            if (DatabaseFormsDependent.get(j).getDependent().getDependentPid() == dependent.getDependentPid()
+                    || dependent.getSSNumber() == DatabaseFormsDependent.get(j).getSSNumber()) {
                 String newLine = setImmigranttoRecord(dependent);
                 updateLine(newLine, dataNameForDependent, j + 1, "Update");
                 temp.add(dependent);
@@ -398,4 +443,5 @@ public class Database {
         myDependent.setDependentPid(Integer.parseInt(StringArray[i++]));
         return myDependent;
     }
+
 }

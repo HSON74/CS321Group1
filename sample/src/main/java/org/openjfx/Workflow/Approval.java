@@ -39,6 +39,7 @@ public class Approval {
         }
         this.approvalForm = form;
         this.approvalWorkflow = system;
+        setPID(this.approvalForm);
         Text[] approvalTextsI = { new Text("First Name: "), new Text("Middle Name:"),
                 new Text("Last Name:"),
                 new Text("Age: "), new Text("Birth Month:"), new Text("Birth Day:"), new Text("Birth Year: "),
@@ -114,7 +115,6 @@ public class Approval {
             formD[i++] = Helper.BooleantoYN(form.getDependent().getemploymentStatus());
             formD[i++] = Helper.BooleantoYN(form.getDependent().getPrevClaim());
             formD[i++] = String.valueOf(form.getDependent().getDependentPid());
-
         } else {
             int i = 0;
             formI[i++] = "My First Name";
@@ -195,6 +195,14 @@ public class Approval {
         approvalGridPane.add(rejectButton, 28, 9, 3, 3);
         // approvalGridPane.add(sumbitButton, 26, approvalTextsI.length + 6);
         // approvalGridPane.add(rejectButton, 27, approvalTextsI.length + 6);
+        sumbitButton.setOnAction(
+                e -> {
+                    if (checkFrom()) {
+                        connection();
+                    } else {
+
+                    }
+                });
 
         // Scene set to application window
         approvalScene = new Scene(approvalGridPane, 1920, 1080);
@@ -226,6 +234,17 @@ public class Approval {
         boolean isSystem = database.checkData(iPid, dPid);
         if (!isSystem) {
             setApprovalStatus(ApprovalStatus.NEEDREVIEW);
+            Immigrant tempI = database.getDataImmigrant(iPid);
+            Dependent tempD = database.getDataDependent(dPid);
+            if (tempI != null && tempD != null) {
+
+                return true;
+            }
+            tempI = database.getDataImmigrantSSN(approvalForm.getImmigrant().getSSNumber());
+            tempD = database.getDataDependentSSN(approvalForm.getDependent().getSSNumber());
+            if (tempI != null && tempD != null) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -234,10 +253,16 @@ public class Approval {
     public boolean connection() {
         if (checkFrom()) {
             setApprovalStatus(ApprovalStatus.COMPLETE);
+            approvalForm.getImmigrant().setDependentPid(approvalForm.getDependent().getDependentPid());
             return database.addData(approvalForm);
         } else {
             return false;
         }
+    }
+
+    public void setPID(Form form) {
+        form.getImmigrant().setImmigrantPid(database.giveImmigrantPid());
+        form.getDependent().setDependentPid(database.giveDependentPid());
     }
 
     /* Setter and Getter for Approval Class */
@@ -256,6 +281,7 @@ public class Approval {
     }
 
     protected void setDatabase(String dataBase, Form form) {
+        System.out.println("System connect to database");
         this.database = new Database(form, dataBase, null);
     }
 
