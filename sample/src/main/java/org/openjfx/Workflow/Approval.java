@@ -208,6 +208,8 @@ public class Approval {
         approvalScene = new Scene(approvalGridPane, 1920, 1080);
         approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(approvalScene);
+        approvalWorkflow.addScene(approvalScene);
+        // reviewWorkflow.getApproval().Adisplay(file, reviewWorkflow, window);
         primaryStage.setMaximized(true);
 
     }
@@ -299,6 +301,10 @@ public class Approval {
 
     public Workflow getWorkflow() {
         return approvalWorkflow;
+    }
+
+    public Scene getApprovalScene() {
+        return approvalScene;
     }
 
 }
