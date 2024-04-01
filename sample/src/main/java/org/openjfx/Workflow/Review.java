@@ -19,12 +19,12 @@ public class Review {
     public void rDisplay(Form form, Workflow system, Stage primaryStage) {
         this.reviewForm = form;
         this.reviewWorkflow = system;
-        reviewdata(form, system, primaryStage);
+        reviewdata(form, primaryStage);
         rScene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(rScene);
     }
 
-    public void revalidate(Form file, Workflow system, Stage primaryStage) {
+    public void revalidate(Form file, Stage primaryStage) {
         if (file.getFormStatus() != FormStatus.COMPLETE) {
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
@@ -63,7 +63,7 @@ public class Review {
         }
     }
 
-    public void reviewdata(Form file, Workflow system, Stage primaryStage) {
+    public void reviewdata(Form file, Stage primaryStage) {
         file.updateStatus(FormStatus.COMPLETE);
         Immigrant immigrant = file.getImmigrant();
         Dependent dependent = file.getDependent();
@@ -131,7 +131,7 @@ public class Review {
         }
         grid.add(conf, 0, 15);
         Button button = new Button("OK");
-        button.setOnAction(e -> revalidate(file, system, primaryStage));
+        button.setOnAction(e -> revalidate(file, primaryStage));
         grid.add(button, 0, 17);
         Scene scene = new Scene(grid, 960,540);
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
