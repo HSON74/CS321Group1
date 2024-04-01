@@ -40,19 +40,26 @@ public class Database {
         if (databaseNameDependent == null) {
             databaseNameDependent = "Dependent";
         }
-        this.dataNameForImmigrant = System.getProperty("user.dir") + "/src/main/java/org/openjfx/Database/"
+        this.dataNameForImmigrant = "./src/main/java/org/openjfx/Database/"
                 + databaseNameImmigrant
                 + ".txt";
-        this.dataNameForDependent = System.getProperty("user.dir") + "./src/main/java/org/openjfx/Database/"
+        this.dataNameForDependent = "./src/main/java/org/openjfx/Database/"
                 + databaseNameDependent + ".txt";
         System.out.println(dataNameForImmigrant);
+        System.out.println(dataNameForDependent);
         try {
             File datafile = new File(dataNameForImmigrant);
             Scanner scr;
+            this.DatabaseFormsImmigrant = new ArrayList<Immigrant>();
             if (datafile.exists()) {
                 scr = new Scanner(datafile);
-                this.ImmigrantPIDGenerate = Integer.parseInt(scr.nextLine());
-                System.out.println(datafile.getAbsolutePath());
+                // this.ImmigrantPIDGenerate = Integer.parseInt(scr.nextLine());
+                while (scr.hasNextLine()) {
+                    String mystring = scr.nextLine();
+                    Immigrant tempImmigrantForm = setRecordtoImmigrant(mystring);
+                    this.DatabaseFormsImmigrant.add(tempImmigrantForm);
+                }
+                scr.close();
                 System.err.println("File Exist");
             } else {
                 datafile.createNewFile();
@@ -60,40 +67,31 @@ public class Database {
                 // writer.write(
                 // "Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy
                 // Son/1234/May/COMPLETE\n");
-                writer.write("1");
-                scr = new Scanner(datafile);
+                // writer.write("1");
                 System.err.println("File Exist not exist");
                 writer.close();
             }
-            this.DatabaseFormsImmigrant = new ArrayList<Immigrant>();
-            while (scr.hasNextLine()) {
-                String mystring = scr.nextLine();
-                Immigrant tempImmigrantForm = setRecordtoImmigrant(mystring);
-                this.DatabaseFormsImmigrant.add(tempImmigrantForm);
-            }
-            scr.close();
             Scanner dscr;
-            File datafiled = new File(databaseNameDependent);
+            File datafiled = new File(dataNameForDependent);
+            this.DatabaseFormsDependent = new ArrayList<Dependent>();
             if (datafiled.exists()) {
                 dscr = new Scanner(datafiled);
-                System.out.println(datafiled.getAbsolutePath());
-                this.DependentPIDGenerate = Integer.parseInt(dscr.nextLine());
+
+                while (dscr.hasNextLine()) {
+                    String mystring = dscr.nextLine();
+                    Dependent tempDependentForm = setRecordtoDependent(mystring);
+                    DatabaseFormsDependent.add(tempDependentForm);
+                }
+                dscr.close();
                 System.err.println("File Exist");
             } else {
                 datafiled.createNewFile();
-                BufferedWriter writer = new BufferedWriter(new FileWriter(datafiled));
-                writer.write("1");
+                BufferedWriter dwriter = new BufferedWriter(new FileWriter(datafiled));
+                // writer.write("1");
                 dscr = new Scanner(datafiled);
                 System.err.println("File Exist not exist");
-                writer.close();
+                dwriter.close();
             }
-            this.DatabaseFormsDependent = new ArrayList<Dependent>();
-            while (dscr.hasNextLine()) {
-                String mystring = dscr.nextLine();
-                Dependent tempDependentForm = setRecordtoDependent(mystring);
-                DatabaseFormsDependent.add(tempDependentForm);
-            }
-            dscr.close();
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -215,8 +213,8 @@ public class Database {
         }
         this.iForm = inputForm.getImmigrant();
         this.dForm = inputForm.getDependent();
-        iForm.setImmigrantPid(ImmigrantPIDGenerate++);
-        dForm.setDependentPid(DependentPIDGenerate++);
+        // iForm.setImmigrantPid(ImmigrantPIDGenerate++);
+        // dForm.setDependentPid(DependentPIDGenerate++);
         String dataStringImmigrant = setImmigranttoRecord(iForm);
         String dataStringDependent = setDependenttoRecord(dForm);
         try {
@@ -352,45 +350,45 @@ public class Database {
 
     public String setImmigranttoRecord(Immigrant immigrant) {
         String myString = Helper.nullStringNullString(immigrant.getFirstName()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getMiddleName()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getLastName()) + "/";
-        myString = String.valueOf(immigrant.getAge()) + "/";
-        myString = String.valueOf(immigrant.getbirthMonth()) + "/";
-        myString = String.valueOf(immigrant.getbirthDay()) + "/";
-        myString = String.valueOf(immigrant.getbirthYear()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getAddress()) + "/";
-        myString = String.valueOf(immigrant.getSSNumber()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getRace()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getGender()) + "/";
-        myString = Helper.BooleantoYN(immigrant.getMarriedStatus()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getPhoneNumber()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getFatherName()) + "/";
-        myString = Helper.nullStringNullString(immigrant.getMotherName()) + "/";
-        myString = Helper.BooleantoYN(immigrant.getemploymentStatus()) + "/";
-        myString = String.valueOf(immigrant.getImmigrantPid()) + "/";
-        myString = String.valueOf(immigrant.getDependentPid());
+        myString += Helper.nullStringNullString(immigrant.getMiddleName()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getLastName()) + "/";
+        myString += String.valueOf(immigrant.getAge()) + "/";
+        myString += String.valueOf(immigrant.getbirthMonth()) + "/";
+        myString += String.valueOf(immigrant.getbirthDay()) + "/";
+        myString += String.valueOf(immigrant.getbirthYear()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getAddress()) + "/";
+        myString += String.valueOf(immigrant.getSSNumber()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getRace()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getGender()) + "/";
+        myString += Helper.BooleantoYN(immigrant.getMarriedStatus()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getPhoneNumber()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getFatherName()) + "/";
+        myString += Helper.nullStringNullString(immigrant.getMotherName()) + "/";
+        myString += Helper.BooleantoYN(immigrant.getemploymentStatus()) + "/";
+        myString += String.valueOf(immigrant.getImmigrantPid()) + "/";
+        myString += String.valueOf(immigrant.getDependentPid()) + "\n";
         return myString;
     }
 
     public String setDependenttoRecord(Dependent dependent) {
         String myString = Helper.nullStringNullString(dependent.getFirstName()) + "/";
-        myString = Helper.nullStringNullString(dependent.getMiddleName()) + "/";
-        myString = Helper.nullStringNullString(dependent.getLastName()) + "/";
-        myString = String.valueOf(dependent.getAge()) + "/";
-        myString = String.valueOf(dependent.getbirthMonth()) + "/";
-        myString = String.valueOf(dependent.getbirthDay()) + "/";
-        myString = String.valueOf(dependent.getbirthYear()) + "/";
-        myString = Helper.nullStringNullString(dependent.getAddress()) + "/";
-        myString = String.valueOf(dependent.getSSNumber()) + "/";
-        myString = Helper.nullStringNullString(dependent.getRace()) + "/";
-        myString = Helper.nullStringNullString(dependent.getGender()) + "/";
-        myString = Helper.BooleantoYN(dependent.getMarriedStatus()) + "/";
-        myString = Helper.nullStringNullString(dependent.getPhoneNumber()) + "/";
-        myString = Helper.nullStringNullString(dependent.getFatherName()) + "/";
-        myString = Helper.nullStringNullString(dependent.getMotherName()) + "/";
-        myString = Helper.BooleantoYN(dependent.getemploymentStatus()) + "/";
-        myString = Helper.BooleantoYN(dependent.getPrevClaim()) + "/";
-        myString = String.valueOf(dependent.getDependentPid());
+        myString += Helper.nullStringNullString(dependent.getMiddleName()) + "/";
+        myString += Helper.nullStringNullString(dependent.getLastName()) + "/";
+        myString += String.valueOf(dependent.getAge()) + "/";
+        myString += String.valueOf(dependent.getbirthMonth()) + "/";
+        myString += String.valueOf(dependent.getbirthDay()) + "/";
+        myString += String.valueOf(dependent.getbirthYear()) + "/";
+        myString += Helper.nullStringNullString(dependent.getAddress()) + "/";
+        myString += String.valueOf(dependent.getSSNumber()) + "/";
+        myString += Helper.nullStringNullString(dependent.getRace()) + "/";
+        myString += Helper.nullStringNullString(dependent.getGender()) + "/";
+        myString += Helper.BooleantoYN(dependent.getMarriedStatus()) + "/";
+        myString += Helper.nullStringNullString(dependent.getPhoneNumber()) + "/";
+        myString += Helper.nullStringNullString(dependent.getFatherName()) + "/";
+        myString += Helper.nullStringNullString(dependent.getMotherName()) + "/";
+        myString += Helper.BooleantoYN(dependent.getemploymentStatus()) + "/";
+        myString += Helper.BooleantoYN(dependent.getPrevClaim()) + "/";
+        myString += String.valueOf(dependent.getDependentPid()) + "\n";
         return myString;
     }
 
