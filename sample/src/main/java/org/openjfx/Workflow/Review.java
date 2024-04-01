@@ -19,12 +19,12 @@ public class Review {
     public void rDisplay(Form form, Workflow system, Stage primaryStage) {
         this.reviewForm = form;
         this.reviewWorkflow = system;
-        reviewdata(form);
+        reviewdata(form, system, primaryStage);
         rScene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(rScene);
     }
 
-    public void revalidate(Form file) {
+    public void revalidate(Form file, Workflow system, Stage primaryStage) {
         if (file.getFormStatus() != FormStatus.COMPLETE) {
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
@@ -41,8 +41,7 @@ public class Review {
                 window.setMinWidth(400);
                 window.setMinHeight(200);
             } 
-            Button button = new Button("OK");
-            button.setOnAction(e -> window.close());
+            Button button = new Button("Return to Data Entry");
             VBox layout = new VBox(10);
             layout.getChildren().addAll(label, button);
             layout.setAlignment(Pos.CENTER);
@@ -53,14 +52,19 @@ public class Review {
             window.show();
             button.setOnAction(e->{
                 reviewWorkflow.returnForm(file);
+                reviewWorkflow.getDataEntry().dataEntryScene(file, reviewWorkflow, primaryStage);
+                primaryStage.setScene(reviewWorkflow.getDataEntry().dataEntryScene);
                 window.close();
             });
         } else {
             reviewWorkflow.submit(file);
+            reviewWorkflow.getApproval().Adisplay(file, reviewWorkflow, primaryStage);
+            primaryStage.setScene(reviewWorkflow.getApproval().approvalScene);
         }
     }
 
-    public void reviewdata(Form file) {
+    public void reviewdata(Form file, Workflow system, Stage primaryStage) {
+        file.updateStatus(FormStatus.COMPLETE);
         Immigrant immigrant = file.getImmigrant();
         Dependent dependent = file.getDependent();
         GridPane grid = new GridPane();
@@ -127,7 +131,7 @@ public class Review {
         }
         grid.add(conf, 0, 15);
         Button button = new Button("OK");
-        button.setOnAction(e -> revalidate(file));
+        button.setOnAction(e -> revalidate(file, system, primaryStage));
         grid.add(button, 0, 17);
         Scene scene = new Scene(grid, 960,540);
         scene.getRoot().setStyle("-fx-font-family: 'serif'");
