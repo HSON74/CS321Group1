@@ -30,7 +30,6 @@ public class Review {
             window.initModality(Modality.APPLICATION_MODAL);
             window.setTitle("Error Message:");
             Label label = new Label();
-            label.setFont(Font.font("seirf", FontWeight.NORMAL, FontPosture.REGULAR, 15));
             if (file.getFormStatus() == FormStatus.EMPTY) {
                 label.setText("Error! Form is empty!");
                 window.setMinWidth(250);

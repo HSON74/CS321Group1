@@ -88,17 +88,16 @@ public class Workflow {
     }
 
     public boolean submit(Form form) {
+        //workflowApproval
         return true;
     }
 
-    /*public boolean getCheck(String string) {
-        return workflowApproval.checkForm
-    }*/
 
     public Form generateForm() {
         Form newForm = new Form();
         Immigrant newImmigrant = new Immigrant();
         Dependent newDependent = new Dependent();
+        //workflowDataEntry
         newForm.setImmigrant(newImmigrant);
         newForm.setDependent(newDependent);
         return newForm;

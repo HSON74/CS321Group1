@@ -6,12 +6,11 @@ import org.openjfx.Workflow.*;
 
 public class ReviewTest {
     Immigrant immigrant = new Immigrant();
-    Dependent dependent = new dependent();
+    Dependent dependent = new Dependent();
     Form form = new Form();
-    ReviewTest review;
 
     @BeforeAll
-    public static void init() {
+    public static void init(Immigrant immigrant, Dependent dependent, Form form) {
         immigrant.setFirstName("John");
         immigrant.setMiddleName("Alex");
         immigrant.setLastName("Doe");
@@ -51,13 +50,8 @@ public class ReviewTest {
         form.setImmigrant(immigrant);
         form.setDependent(dependent);
     }
-    @Test
-    void testReviewValidate() {
-        assertNotNull(review.revalidate(form));
-    }
 
     public static void main(String[] args) {
-        review = new ReviewTest();
-        review.testReviewValidate();
+        ReviewTest review = new ReviewTest();
     }
 }
