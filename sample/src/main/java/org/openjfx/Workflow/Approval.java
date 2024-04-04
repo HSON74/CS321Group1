@@ -25,7 +25,7 @@ public class Approval {
         INPROGRESS, NEEDREVIEW, COMPLETE
     }
 
-    private Form approvalForm;
+    private Form approvalForm; // The store instance of the form pass in to the application
     private Database database;
     private ApprovalStatus approvalStatus;
     private Workflow approvalWorkflow;
@@ -33,13 +33,13 @@ public class Approval {
     // Application Scene update
     public Scene approvalScene;
 
+    /* Set the the application when the user sumbit the form for review */
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         if (form == null) {
             System.out.println("Null form");
         }
         this.approvalForm = form;
         this.approvalWorkflow = system;
-        // setPID(this.approvalForm);
         Text[] approvalTextsI = { new Text("First Name: "), new Text("Middle Name:"),
                 new Text("Last Name:"),
                 new Text("Age: "), new Text("Birth Month:"), new Text("Birth Day:"), new Text("Birth Year: "),
@@ -203,7 +203,11 @@ public class Approval {
 
                     }
                 });
+        rejectButton.setOnAction(e -> {
 
+            approvalWorkflow.getReview().rDisplay(this.getForm(), this.getWorkflow(), primaryStage);
+            primaryStage.setScene(approvalWorkflow.getScene(2));
+        });
         // Scene set to application window
         approvalScene = new Scene(approvalGridPane, 1920, 1080);
         approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
@@ -233,7 +237,8 @@ public class Approval {
         }
         int iPid = approvalForm.getImmigrant().getImmigrantPid();
         int dPid = approvalForm.getDependent().getDependentPid();
-        boolean isSystem = database.checkData(iPid, dPid);
+        String status = "";
+        boolean isSystem = database.checkData(iPid, dPid, status);
         if (!isSystem) {
             setApprovalStatus(ApprovalStatus.NEEDREVIEW);
             Immigrant tempI = database.getDataImmigrant(iPid);
