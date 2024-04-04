@@ -231,7 +231,7 @@ public class Database {
                 addDependentToData(dForm);
             }else{
                 updateImmigrant(iForm);
-                updateDependent(dForm)
+                updateDependent(dForm);
             }
         }
         return true;
