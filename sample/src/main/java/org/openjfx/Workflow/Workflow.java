@@ -88,8 +88,7 @@ public class Workflow {
     }
 
     public boolean submit(Form form) {
-        //workflowApproval
-        return true;
+        return workflowDatabase.addData(form);
     }
 
 
