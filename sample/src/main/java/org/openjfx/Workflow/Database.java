@@ -16,12 +16,20 @@ import org.openjfx.Business.Dependent;
 import org.openjfx.Business.Form;
 import org.openjfx.Business.Immigrant;
 
+/**
+ * This base class object will for handling two 
+ * particular database. One is for immigrant and the 
+ * another is for dependent. 
+ */
 public class Database {
+    //Private class & variable.
+    private int immigrantPIDGenerate; //Generate a immigrant pid
+    private int dependentPIDGenerate; //Generate a dependent pid
 
-    private int immigrantPIDGenerate;
-    private int dependentPIDGenerate;
-    private String dataNameForImmigrant; //
-    private String dataNameForDependent; //
+    private String dataNameForImmigrant; //The immigrant record the system current accessing.
+    private String dataNameForDependent; //The dependent record the system current accessing.
+
+    //protected class & variable.
     protected ArrayList<Immigrant> databaseFormsImmigrant;
     protected ArrayList<Dependent> databaseFormsDependent;
 
@@ -44,12 +52,12 @@ public class Database {
         System.out.println(dataNameForImmigrant);
         System.out.println(dataNameForDependent);
         try {
+            //Access to the immgrint record and create a temp database array for application.
             File datafile = new File(dataNameForImmigrant);
             Scanner scr;
             this.databaseFormsImmigrant = new ArrayList<Immigrant>();
             if (datafile.exists()) {
                 scr = new Scanner(datafile);
-                // this.ImmigrantPIDGenerate = Integer.parseInt(scr.nextLine());
                 while (scr.hasNextLine()) {
                     String mystring = scr.nextLine();
                     Immigrant tempImmigrantForm = setRecordtoImmigrant(mystring);
@@ -60,13 +68,10 @@ public class Database {
             } else {
                 datafile.createNewFile();
                 BufferedWriter writer = new BufferedWriter(new FileWriter(datafile));
-                // writer.write(
-                // "Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy/Son/Huy/null/Son/13/04/30/2001/012931/Student/Male/false/703-300-3003/Hello/World/1234/Huy
-                // Son/1234/May/COMPLETE\n");
-                // writer.write("1");
                 System.err.println("File Exist not exist");
                 writer.close();
             }
+            //Access to the dependent record and create a temp database array for application.
             Scanner dscr;
             File datafiled = new File(dataNameForDependent);
             this.databaseFormsDependent = new ArrayList<Dependent>();
@@ -96,14 +101,8 @@ public class Database {
 
     }
 
-    public static void main(String[] args) {
-        Database testbase = new Database(new Form(), "FakeRecordImmigrant", "FakeRecordDependent");
-
-        // testbase.addData(new Form());
-
-    }
-
-    // Add the
+    /* A method for the add datas from From class format
+    into the system record. */
     public boolean addData(Form form) {
         if (form == null) {
             return false;
@@ -120,34 +119,28 @@ public class Database {
     public boolean checkData(int iPID, int dPID, String result) {
         Immigrant myImmigrant = getDataImmigrant(iPID);
         Dependent myDependent = getDataDependent(dPID);
+        if(myImmigrant == null && myDependent == null){
+            result = "both is not system";
+            return true;
+        }
         if (myImmigrant == null) {
             System.err.println("Immigrant information is not in system");
+            result = "Immigrant is not system";
+            return false;
         }
         if (myDependent == null) {
             System.err.println("Dependent information is not in system");
+            result = "Immigrant is not system";
+            return false;
         }
-        if (myDependent != null && myDependent.getPrevClaim()) {
-            if (myImmigrant.getDependentPid() == myDependent.getDependentPid()) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (myDependent != null && myImmigrant != null) {
-            myDependent.setPrevClaim(true);
-            myImmigrant.setDependentPid(myDependent.getDependentPid());
-            updateImmigrant(myImmigrant);
-            updateDependent(myDependent);
-            return true;
-        }
-        return false;
+        result = "Information need update";
+        return true;
     }
 
     /*
      * The method will search the the Database froms for
-     * Immigrant using the integer variable iPID, which
-     * is Immigrant Pid.
-     * 
-     * @param
+     * immigrant using the integer variable iPID, which
+     * is immigrant Pid.
      */
     public Immigrant getDataImmigrant(int iPID) {
         if (databaseFormsImmigrant == null) {
@@ -160,7 +153,11 @@ public class Database {
         }
         return null;
     }
-
+    /*
+     * The method will search the the Database froms for
+     * dependent using the integer variable iPID, which
+     * is dependent Pid.
+     */
     public Dependent getDataDependent(int iPID) {
         if (databaseFormsDependent == null) {
             return null;
@@ -172,8 +169,12 @@ public class Database {
         }
         return null;
     }
-
-    public Immigrant getDataImmigrantSSN(int sSNumber) {
+    /*
+     * The method will search the the Database froms for
+     * immigrant using the integer variable social security number, which
+     * is immigrant social security number.
+     */
+    private Immigrant getDataImmigrantSSN(int sSNumber) {
         if (databaseFormsImmigrant == null) {
             return null;
         }
@@ -184,8 +185,12 @@ public class Database {
         }
         return null;
     }
-
-    public Dependent getDataDependentSSN(int sSNumber) {
+    /*
+     * The method will search the the Database froms for
+     * Dependent using the integer variable social security number, which
+     * is Dependent social security number.
+     */
+    private Dependent getDataDependentSSN(int sSNumber) {
         if (databaseFormsDependent == null) {
             return null;
         }
@@ -208,17 +213,26 @@ public class Database {
         dependentPIDGenerate++;
         return oldNumber;
     }
-
+    /*
+     * A method that save if the form information don't exist in the system.
+     */
     private boolean saveData(Form inputForm) {
         if (inputForm.getDependent() == null || inputForm.getImmigrant() == null) {
             return false;
         }
         Immigrant iForm = inputForm.getImmigrant();
         Dependent dForm = inputForm.getDependent();
-        String status = new String();
+        String status = "";
         if (checkData(iForm.getImmigrantPid(), dForm.getDependentPid(), status)) {
-            addImmigrantToData(iForm);
-            addDependentToData(dForm);
+            if(status.equalsIgnoreCase("both is not system")){
+                dFrom.setPrevClaim(dForm.getPrevClaim());
+                iFrom.setImmigrantPid(dForm.getDataDependent)
+                addImmigrantToData(iForm); 
+                addDependentToData(dForm);
+            }else{
+                updateImmigrant(iForm);
+                updateDependent(dForm)
+            }
         }
         return true;
     }
@@ -256,7 +270,7 @@ public class Database {
         boolean result = false;
         for (int j = 0; j < databaseFormsImmigrant.size(); j++) {
             if (databaseFormsImmigrant.get(j).getImmigrantPid() == pid) {
-                updateLine("", dataNameForImmigrant, j + 1, "Delete");
+                updateLine("", dataNameForImmigrant, j + 1, 'd');
                 result = true;
             } else {
                 temp.add(databaseFormsImmigrant.get(j));
@@ -272,7 +286,7 @@ public class Database {
         boolean result = false;
         for (int j = 0; j < databaseFormsDependent.size(); j++) {
             if (databaseFormsDependent.get(j).getDependentPid() == pid) {
-                updateLine("", dataNameForDependent, j + 1, "Delete");
+                updateLine("", dataNameForDependent, j + 1, 'd');
                 result = true;
             } else {
                 temp.add(databaseFormsDependent.get(j));
@@ -293,7 +307,7 @@ public class Database {
             if (databaseFormsImmigrant.get(j).getImmigrantPid() == immigrant.getImmigrantPid()
                     || immigrant.getSSNumber() == databaseFormsImmigrant.get(j).getSSNumber()) {
                 String newLine = setImmigranttoRecord(immigrant);
-                updateLine(newLine, dataNameForImmigrant, j + 1, "Update");
+                updateLine(newLine, dataNameForImmigrant, j + 1, 'u');
                 temp.add(immigrant);
             } else {
                 temp.add(databaseFormsImmigrant.get(j));
@@ -314,7 +328,7 @@ public class Database {
             if (databaseFormsDependent.get(j).getDependent().getDependentPid() == dependent.getDependentPid()
                     || dependent.getSSNumber() == databaseFormsDependent.get(j).getSSNumber()) {
                 String newLine = setImmigranttoRecord(dependent);
-                updateLine(newLine, dataNameForDependent, j + 1, "Update");
+                updateLine(newLine, dataNameForDependent, j + 1, 'u');
                 temp.add(dependent);
             } else {
                 temp.add(databaseFormsDependent.get(j));
@@ -325,7 +339,7 @@ public class Database {
         return result;
     }
 
-    public void updateLine(String lineChange, String DatabaseFile, int changeline, String command) {
+    public void updateLine(String lineChange, String DatabaseFile, int changeline, char command) {
         String tempFileString = "./src/main/java/org/openjfx/Database/temp.txt";
         File oldFile = new File(DatabaseFile);
         File newFile = new File(tempFileString);
@@ -344,9 +358,9 @@ public class Database {
                 if (changeline != line) {
                     pw.println(currentLine);
                 } else {
-                    if (command.equalsIgnoreCase("Delete")) {
-
-                    } else if (command.equalsIgnoreCase("Update")) {
+                    if (command == 'd') {
+                        continue;
+                    } else if (command == 'u') {
                         pw.println(lineChange);
                     } else {
 

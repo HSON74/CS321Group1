@@ -37,6 +37,11 @@ public class Approval {
     public void Adisplay(Form form, Workflow system, Stage primaryStage) {
         if (form == null) {
             System.out.println("Null form");
+            return;
+        }
+        if(system == null){
+            System.out.println("Null system");
+            return;
         }
         this.approvalForm = form;
         this.approvalWorkflow = system;
@@ -73,7 +78,8 @@ public class Approval {
                 FontPosture.REGULAR, 25));
         String[] formI = new String[approvalTextsI.length];
         String[] formD = new String[approvalTextsD.length];
-        if (checkFrom()) {
+        String status = "";
+        if (checkFrom(status)) {
             System.out.println("Form exist");
             int i = 0;
             formI[i++] = Helper.nullStringCheck(form.getImmigrant().getFirstName());
@@ -177,8 +183,7 @@ public class Approval {
             approvalGridPane.add(approvalTextsD[i], 24, i + 5);
             approvalGridPane.add(new Text(formD[i]), 25, i + 5);
         }
-        // approvalGridPane.getStylesheets().add("./sample/src/main/java/org/openjfx/CSS/"
-        // + "approval.css");
+
         // Button Setup
         Button sumbitButton = new Button();
         Button rejectButton = new Button();
@@ -186,34 +191,29 @@ public class Approval {
         sumbitButton.setScaleY(3);
         sumbitButton.setText("Approval Form");
         sumbitButton.setTextFill(Color.BLACK);
-        // sumbitButton.setStyle("sumbitbutton");
         rejectButton.setText("   Reject Form   ");
         rejectButton.setTextFill(Color.BLACK);
         rejectButton.setScaleX(3);
         rejectButton.setScaleY(3);
         approvalGridPane.add(sumbitButton, 28, 5, 3, 3);
         approvalGridPane.add(rejectButton, 28, 9, 3, 3);
-        // approvalGridPane.add(sumbitButton, 26, approvalTextsI.length + 6);
-        // approvalGridPane.add(rejectButton, 27, approvalTextsI.length + 6);
+
         sumbitButton.setOnAction(
                 e -> {
-                    if (checkFrom()) {
-                        connection();
-                    } else {
-
-                    }
+                    connection();
                 });
         rejectButton.setOnAction(e -> {
 
             approvalWorkflow.getReview().rDisplay(this.getForm(), this.getWorkflow(), primaryStage);
-            primaryStage.setScene(approvalWorkflow.getScene(2));
+            primaryStage.setScene(approvalWorkflow.getScene(0));
         });
+
+
         // Scene set to application window
         approvalScene = new Scene(approvalGridPane, 1920, 1080);
         approvalScene.getRoot().setStyle("-fx-font-family: 'serif'");
         primaryStage.setScene(approvalScene);
         approvalWorkflow.addScene(approvalScene);
-        // reviewWorkflow.getApproval().Adisplay(file, reviewWorkflow, window);
         primaryStage.setMaximized(true);
 
     }
@@ -226,7 +226,7 @@ public class Approval {
 
     }
 
-    public boolean checkFrom() {
+    private boolean checkFrom(String status) {
         if (approvalForm == null) {
             System.err.println("The form is null");
             return false;
@@ -237,28 +237,12 @@ public class Approval {
         }
         int iPid = approvalForm.getImmigrant().getImmigrantPid();
         int dPid = approvalForm.getDependent().getDependentPid();
-        String status = "";
-        boolean isSystem = database.checkData(iPid, dPid, status);
-        if (!isSystem) {
-            setApprovalStatus(ApprovalStatus.NEEDREVIEW);
-            Immigrant tempI = database.getDataImmigrant(iPid);
-            Dependent tempD = database.getDataDependent(dPid);
-            if (tempI != null && tempD != null) {
-
-                return true;
-            }
-            tempI = database.getDataImmigrantSSN(approvalForm.getImmigrant().getSSNumber());
-            tempD = database.getDataDependentSSN(approvalForm.getDependent().getSSNumber());
-            if (tempI != null && tempD != null) {
-                return false;
-            }
-            return true;
-        }
-        return false;
+        return database.checkData(iPid, dPid, status);
     }
 
     public boolean connection() {
-        if (checkFrom()) {
+        String status = "";
+        if (checkFrom(status)) {
             setApprovalStatus(ApprovalStatus.COMPLETE);
             approvalForm.getImmigrant().setDependentPid(approvalForm.getDependent().getDependentPid());
             return database.addData(approvalForm);
